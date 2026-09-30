@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather for London Streets and Country Lanes</title>
+    <style>
+        :root {
+            --bg-surface: #1a1a1a;
+            --text-primary: #eaeaea;
+            --brand: #3E5C76;
+            --cta: #D39A4A;
+        }
+
+        body {
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin: 0.5rem 0 2rem;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            padding: 0 2rem;
+        }
+
+        section {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .column {
+            flex: 1;
+            margin: 0 1rem;
+            padding: 1rem;
+            background-color: var(--brand);
+            border-radius: 5px;
+        }
+
+        .column h3 {
+            font-size: 1.2rem;
+            margin-top: 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid #444;
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        .cta-button:hover {
+            background-color: #b28427;
+        }
+
+        .cta-button:focus {
+            box-shadow: 0 0 0 2px var(--cta);
+        }
+
+        @media (max-width: 768px) {
+            section {
+                flex-direction: column;
+            }
+            .column {
+                margin: 0 0 2rem;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: #eaeaea;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Weather for London Streets and Country Lanes</h1>
+        <h2>Rainy uses a distinctly UK visual and emotional frame so the product feels relevant whether you’re dodging showers in the city or planning around them in the countryside. It’s built to resonate with how people actually live with weather in Britain.</h2>
+    </header>
+    <main>
+        <section>
+            <div class="column">
+                <h3>London Identity</h3>
+                <p>Creates a strong London and countryside identity</p>
+            </div>
+            <div class="column">
+                <h3>Cultural Relevance</h3>
+                <p>Feels culturally specific rather than generic or global</p>
+            </div>
+            <div class="column">
+                <h3>Connection to Environment</h3>
+                <p>Helps users connect weather conditions to their real surroundings</p>
+            </div>
+        </section>
+        <footer>
+            <button class="cta-button">Join the Waitlist</button>
+        </footer>
+    </main>
+</body>
+</html>

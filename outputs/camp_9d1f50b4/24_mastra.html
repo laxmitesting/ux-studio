@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nature-First Experience Design</title>
+    <style>
+        :root {
+            --bg-surface: #ffffff;
+            --text-primary: #333333;
+            --brand: #5F7A61;
+            --cta: #6E8B74;
+        }
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        header {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--brand);
+            color: #ffffff;
+        }
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        section {
+            margin: 1.5rem 0;
+            max-width: 800px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        li {
+            margin: 0.5rem 0;
+            padding-left: 1.5em;
+            position: relative;
+        }
+        li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: var(--cta);
+        }
+        .cta-button {
+            display: inline-block;
+            margin: 2rem 0;
+            padding: 1rem 2rem;
+            background-color: var(--cta);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover,
+        .cta-button:focus {
+            background-color: darken(var(--cta), 10%);
+            outline: 2px solid #ffffff;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            margin-top: auto;
+            font-size: 0.9rem;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+            header {
+                background-color: var(--brand);
+            }
+            .cta-button {
+                background-color: var(--cta);
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Design digital experiences that feel rooted in nature</h1>
+    <h2>Soul gives you an open-source way to craft interfaces that support the quiet, restorative feel of yoga and wellness. The result is software that looks and behaves more like a practice space than a generic app.</h2>
+</header>
+
+<main>
+    <section>
+        <h2>Key Benefits</h2>
+        <ul>
+            <li>Nature-inspired visual direction for calmer experiences</li>
+            <li>Flexible open-source base for brand-specific styling</li>
+            <li>Wellness-friendly tone that better matches yoga audiences</li>
+        </ul>
+    </section>
+    <a class="cta-button" href="#explore">Explore the Aesthetic</a>
+</main>
+
+<footer>
+    &copy; 2023 Nature-First Experience Design. All rights reserved.
+</footer>
+
+</body>
+</html>

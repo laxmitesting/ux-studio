@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transparent Tooling for Wellness Devs</title>
+    <style>
+        :root {
+            --bg-surface: #181818;
+            --text-primary: #e0e0e0;
+            --brand: #3E5C4E;
+            --cta: #C7A96B;
+            --cta-hover: #d9c295;
+            --font-family-monospace: 'Courier New', Courier, monospace;
+            --font-family-sans: 'Arial', sans-serif;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-family-sans);
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: var(--brand);
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            padding: 20px;
+            gap: 20px;
+            overflow: hidden;
+        }
+        section {
+            flex: 1;
+            background: #242424;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        h1 {
+            font-family: var(--font-family-monospace);
+            font-size: 2em;
+            margin: 0;
+        }
+        h2 {
+            font-family: var(--font-family-monospace);
+            font-size: 1.4em;
+            color: var(--text-primary);
+        }
+        p {
+            flex-grow: 1;
+        }
+        .cta-button {
+            background: var(--cta);
+            color: var(--bg-surface);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            font-family: var(--font-family-sans);
+        }
+        .cta-button:hover {
+            background: var(--cta-hover);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--brand);
+        }
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            section {
+                background: #ffffff;
+                border: 1px solid #ddd;
+                box-shadow: none;
+            }
+            h2 {
+                color: #000000;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Open the hood before you build on it</h1>
+        <h2>Soul is designed for people who want wellness software they can verify, modify, and trust. Its open-source approach makes the implementation visible, so teams and solo builders can evaluate it on real technical merit.</h2>
+    </header>
+    <main>
+        <section>
+            <h2>Visible Implementation</h2>
+            <p>Access the entire implementation for easier evaluation of quality and architecture.</p>
+            <button class="cta-button">Inspect the Architecture</button>
+        </section>
+        <section>
+            <h2>Custom Workflows</h2>
+            <p>Modify the foundation to tailor it to your specific needs and workflows.</p>
+            <button class="cta-button">Inspect the Architecture</button>
+        </section>
+        <section>
+            <h2>Build Trust</h2>
+            <p>Engage with an open-source approach that fosters transparency and trust for technical users.</p>
+            <button class="cta-button">Inspect the Architecture</button>
+        </section>
+    </main>
+    <footer>
+        © 2023 Soul Wellness. All Rights Reserved.
+    </footer>
+</body>
+</html>

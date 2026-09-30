@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quality You Can Budget Around</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #08111f;
+      --bg-elevated: #0d1728;
+      --bg-card: #101b2f;
+      --bg-card-2: #13213a;
+      --text-primary: #f4f7fb;
+      --text-secondary: #b7c4d9;
+      --text-muted: #8d9bb0;
+      --brand: #1D4F91;
+      --brand-strong: #2a67ba;
+      --cta: #FF7A21;
+      --cta-strong: #ff8a3d;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.36);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --max-width: 1160px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+        --bg: #f5f8fc;
+        --bg-elevated: #ffffff;
+        --bg-card: #ffffff;
+        --bg-card-2: #eef4fb;
+        --text-primary: #0b1b33;
+        --text-secondary: #41536d;
+        --text-muted: #5f6f86;
+        --border: rgba(13, 27, 51, 0.10);
+        --border-strong: rgba(13, 27, 51, 0.16);
+        --shadow: 0 20px 50px rgba(14, 32, 62, 0.10);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(900px 520px at 12% 8%, rgba(29, 79, 145, 0.24), transparent 60%),
+        radial-gradient(700px 440px at 85% 12%, rgba(255, 122, 33, 0.14), transparent 55%),
+        linear-gradient(180deg, var(--bg) 0%, color-mix(in oklab, var(--bg) 92%, #000 8%) 100%);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      width: min(100%, var(--max-width));
+      margin: 0 auto;
+      padding: 24px 20px 40px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 0 28px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background:
+        linear-gradient(145deg, var(--brand) 0%, var(--brand-strong) 100%);
+      box-shadow: 0 12px 28px rgba(29, 79, 145, 0.35);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 1.05rem;
+      font-weight: 800;
+      flex: none;
+    }
+
+    .brand small {
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      margin-top: 2px;
+    }
+
+    .hero {
+      padding: 10px 0 28px;
+    }
+
+    .hero-shell {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-panel,
+    .card {
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, color-mix(in oklab, var(--bg-card) 94%, white 6%) 0%, var(--bg-card-2) 100%);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-copy {
+      padding: 34px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "";
+      position: absolute;
+      inset: auto -8% -38% auto;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(29, 79, 145, 0.22) 0%, rgba(29, 79, 145, 0.05) 50%, transparent 72%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cta), rgba(255, 122, 33, 0.12));
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+
+    .subheadline {
+      margin: 18px 0 0;
+      max-width: 62ch;
+      color: var(--text-secondary);
+      font-size: 1.05rem;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 15px 22px;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--cta) 0%, color-mix(in oklab, var(--cta) 82%, #000 18%) 100%);
+      color: #fff;
+      box-shadow: 0 14px 30px rgba(255, 122, 33, 0.28);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); background: linear-gradient(180deg, var(--cta-strong) 0%, var(--cta) 100%); }
+    .btn-primary:active { transform: translateY(1px) scale(0.99); }
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+    .btn-secondary:hover { background: rgba(255, 255, 255, 0.07); transform: translateY(-1px); }
+
+    .btn:focus-visible,
+    a:focus-visible {
+      outline: 3px solid color-mix(in oklab, var(--cta) 65%, white 35%);
+      outline-offset: 3px;
+    }
+
+    .hero-panel {
+      padding: 26px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+      background:
+        linear-gradient(180deg, rgba(29, 79, 145, 0.18) 0%, rgba(16, 27, 47, 0.92) 40%, rgba(16, 27, 47, 1) 100%);
+    }
+
+    .price-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      font-size: 0.93rem;
+    }
+
+    .price-chip strong { color: var(--text-primary); }
+
+    .metric {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    .metric h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .metric p {
+      margin: 10px 0 0;
+      color: var(--text-secondary);
+    }
+
+    main { display: grid; gap: 24px; }
+
+    .value-section {
+      display: grid;
+      gap: 16px;
+    }
+
+    .section-heading {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 2px 2px 0;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 70ch;
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      padding: 22px;
+      min-height: 160px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px 120px at 15% 0%, rgba(29, 79, 145, 0.20), transparent 60%);
+      pointer-events: none;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+      letter-spacing: -0.02em;
+    }
+
+    .card p, .card li {
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 7px 10px;
+      margin-bottom: 14px;
+      border-radius: 999px;
+      background: rgba(29, 79, 145, 0.16);
+      color: #cfe0fb;
+      border: 1px solid rgba(29, 79, 145, 0.28);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--cta);
+      box-shadow: 0 0 0 4px rgba(255, 122, 33, 0.18);
+    }
+
+    .span-7 { grid-column: span 7; }
+    .span-5 { grid-column: span 5; }
+    .span-4 { grid-column: span 4; }
+    .span-8 { grid-column: span 8; }
+
+    .cost-breakdown ul,
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .cost-breakdown li,
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      flex: none;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 122, 33, 0.14);
+      color: var(--cta);
+      font-weight: 800;
+      font-size: 0.88rem;
+      border: 1px solid rgba(255, 122, 33, 0.22);
+      margin-top: 1px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .mini {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+    }
+
+    .mini strong {
+      display: block;
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    footer {
+      padding: 8px 0 24px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 960px) {
+      .hero-shell { grid-template-columns: 1fr; }
+      .span-7, .span-5, .span-4, .span-8 { grid-column: span 12; }
+    }
+
+    @media (max-width: 640px) {
+      .page { padding-inline: 16px; }
+      header { padding-bottom: 18px; }
+      .hero-copy, .hero-panel, .card { border-radius: 22px; }
+      .hero-copy, .hero-panel, .card { padding: 20px; }
+      .two-col { grid-template-columns: 1fr; }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+      .brand small { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <a class="brand" href="#top" aria-label="flydubai home">
+        <span class="brand-mark">f</span>
+        <span>
+          flydubai
+          <small>Quality you can budget around</small>
+        </span>
+      </a>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-shell">
+          <div class="hero-copy">
+            <div class="eyebrow">Value-first travel planning</div>
+            <h1 id="hero-title">Pay less for the flight, not for avoidable headaches</h1>
+            <p class="subheadline">
+              flydubai is positioned for tourists who want a smarter allocation of their travel budget.
+              The value comes from keeping fares lean while still expecting a professionally run journey.
+            </p>
+
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#availability">Check Availability</a>
+              <a class="btn btn-secondary" href="#value">See the value breakdown</a>
+            </div>
+          </div>
+
+          <aside class="hero-panel" aria-label="Budget value summary">
+            <div class="price-chip">
+              <strong>Lean fare structure</strong>
+              <span>built for cost-aware travelers</span>
+            </div>
+
+            <div class="metric">
+              <h2>More room for Dubai</h2>
+              <p>Keep the flight efficient so more of your budget can go toward experiences, meals, and stays that matter once you land.</p>
+            </div>
+
+            <div class="two-col">
+              <div class="mini">
+                <strong>Efficient model</strong>
+                <p>Designed to avoid unnecessary expense without overcomplicating the journey.</p>
+              </div>
+              <div class="mini">
+                <strong>Professional delivery</strong>
+                <p>A practical option for travelers who expect reliability and value together.</p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="value-section" id="value" aria-labelledby="value-title">
+        <div class="section-heading">
+          <h2 id="value-title">A bento-grid of value pillars, framed around spend</h2>
+          <p>For travelers evaluating value, the question is not simply “what is the fare?” but “how does the fare protect the rest of my budget and the quality of the trip?”</p>
+        </div>
+
+        <div class="bento-grid">
+          <article class="card span-7 cost-breakdown">
+            <div class="pill">Cost structure</div>
+            <h3>Keep the flight budget lean</h3>
+            <p>flydubai’s appeal starts with a lower fare structure that helps cost-aware travelers avoid overspending on the part of the trip they simply need to get right.</p>
+            <ul>
+              <li><span class="check">✓</span><span>Lower fare structure for cost-aware travelers</span></li>
+              <li><span class="check">✓</span><span>Efficient airline model that avoids unnecessary expense</span></li>
+              <li><span class="check">✓</span><span>More flexibility to spend on Dubai itself</span></li>
+            </ul>
+          </article>
+
+          <article class="card span-5">
+            <div class="pill">Budget balance</div>
+            <h3>Spend where it creates the experience</h3>
+            <p>When the airfare stays controlled, more of the trip budget can support the reasons you’re traveling in the first place.</p>
+            <div class="two-col" style="margin-top: 18px;">
+              <div class="mini">
+                <strong>Flight</strong>
+                <p>Lean, practical, and budget-aware.</p>
+              </div>
+              <div class="mini">
+                <strong>Dubai</strong>
+                <p>More room for the city, the food, and the stay.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card span-4">
+            <div class="pill">Operational reassurance</div>
+            <h3>Simple doesn’t mean compromised</h3>
+            <p>Value is strongest when affordability is paired with a professionally run journey that avoids the kind of friction that can erode a trip.</p>
+          </article>
+
+          <article class="card span-4">
+            <div class="pill">Value signal</div>
+            <h3>Budget with confidence</h3>
+            <p>The objective is straightforward: pay less for the flight while keeping expectations aligned with a well-managed travel experience.</p>
+          </article>
+
+          <article class="card span-4">
+            <div class="pill">Traveler fit</div>
+            <h3>Ideal for tourists maximizing ROI</h3>
+            <p>Best for people who want practical airfare economics without sacrificing trip quality where it matters most.</p>
+          </article>
+
+          <article class="card span-4">
+            <div class="pill">Cost framing</div>
+            <h3>Better allocation, not just lower spend</h3>
+            <p>It’s about making every dollar work harder across the full travel plan.</p>
+          </article>
+        </div>
+      </section>
+
+      <section aria-labelledby="reassurance-title">
+        <div class="section-heading">
+          <h2 id="reassurance-title">Quality reassurance for budget-focused travelers</h2>
+          <p>The promise is not luxury for its own sake. It’s a balanced, professional journey that lets you preserve budget for the destination.</p>
+        </div>
+
+        <div class="hero-shell" style="grid-template-columns: 1fr;">
+          <article class="card">
+            <div class="pill">Why it works</div>
+            <div class="two-col">
+              <div class="mini">
+                <strong>Lean fare structure</strong>
+                <p>Designed for travelers who want to control flight costs without losing the confidence of a managed experience.</p>
+              </div>
+              <div class="mini">
+                <strong>Efficient airline model</strong>
+                <p>A streamlined approach that avoids unnecessary expense and keeps the journey commercially sensible.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="availability" aria-labelledby="cta-title">
+        <div class="hero-shell" style="grid-template-columns: 1.05fr 0.95fr;">
+          <article class="hero-copy" style="padding: 28px;">
+            <div class="eyebrow">Ready to compare options?</div>
+            <h2 id="cta-title" style="margin:0; font-size: clamp(1.8rem, 4vw, 3.1rem); line-height: 1.02; letter-spacing: -0.04em;">Check availability and protect more of your Dubai budget</h2>
+            <p class="subheadline" style="margin-top: 14px;">
+              Explore a value-first option that keeps airfare lean and leaves more room for the parts of the trip you actually came for.
+            </p>
+            <div class="cta-row">
+              <a class="btn btn-primary" href="#top">Check Availability</a>
+              <a class="btn btn-secondary" href="#value">Review value pillars</a>
+            </div>
+          </article>
+
+          <aside class="hero-panel">
+            <div class="metric">
+              <h2>Quality you can budget around</h2>
+              <p>Lean pricing, practical efficiency, and a straightforward fit for tourists who want more trip value per dirham.</p>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      flydubai — Quality you can budget around
+    </footer>
+  </div>
+</body>
+</html>

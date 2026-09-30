@@ -1,0 +1,20 @@
+{
+  "name": "ux-studio",
+  "version": "1.0.0",
+  "description": "ux-studio/ ├── .github/ │   └── workflows/ │       └── test.yaml              # GitHub Actions CI pipeline ├── .streamlit/ │   └── config.toml                # App theme & wide layout config ├── data/ │   └── .gitkeep                   # Tracks directory; ignores blackboard.db ├── outputs/ │   └── .gitkeep                   # Tracks directory; ignores generated HTMLs ├── db/ │   ├── __init__.py │   └── database.py                # Step 1: Blackboard schema & SQLite helpers ├── utils/ │   ├── __init__.py │   └── sanitizer.py               # Step 2: HTML sanitization & validation ├── orchestrator/ │   ├── __init__.py │   ├── prompt_templates.py        # Step 3: Decomposes brief into 5 archetypes │   └── orchestrator.py ├── workers/                               # 5 Framework-specific polling workers │   ├── __init__.py │   ├── base_worker.py                     # Shared polling loop & sanitization │   ├── worker_agno.py                     # Agno framework implementation │   ├── worker_google_adk.py               # Google GenAI / ADK implementation │   ├── worker_strands.py                  # Strands implementation │   ├── worker_mastra.py                   # Mastra implementation │   └── worker_maf.py                      # MAF (Microsoft AutoGen Framework) implementation ├── viewer/ │   └── app.py                     # Step 5: Streamlit dashboard & iframes ├── tests/ │   ├── conftest.py │   ├── unit/ │   │   ├── test_database.py │   │   ├── test_orchestrator.py │   │   ├── test_sanitizer.py         └── test_workers.py             │   ├── integration/ │   │   ├── test_worker_lifecycle.py │   │   └── test_concurrency.py │   └── e2e/ │       └── test_full_studio_loop.py ├── .env.example                   # Environment variable template ├── .gitignore                     # Git ignore rules ├── pytest.ini                     # Pytest settings ├── requirements.txt               # Dependencies └── README.md",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@ai-sdk/openai": "^4.0.81",
+    "@mastra/core": "^1.71.0"
+  }
+}

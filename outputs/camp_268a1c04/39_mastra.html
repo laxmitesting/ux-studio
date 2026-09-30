@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>A digital experience worth signing up for</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-surface: #0b1020;
+      --bg-elevated: #11182c;
+      --bg-soft: rgba(255, 255, 255, 0.05);
+      --bg-soft-2: rgba(255, 255, 255, 0.08);
+      --text-primary: #f5f7ff;
+      --text-secondary: rgba(245, 247, 255, 0.74);
+      --text-muted: rgba(245, 247, 255, 0.56);
+      --brand: #8B5CF6;
+      --brand-glow: rgba(139, 92, 246, 0.35);
+      --cta: #22C55E;
+      --cta-hover: #16a34a;
+      --border: rgba(255, 255, 255, 0.12);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        color-scheme: light;
+        --bg-surface: #f7f7fb;
+        --bg-elevated: #ffffff;
+        --bg-soft: rgba(17, 24, 39, 0.04);
+        --bg-soft-2: rgba(17, 24, 39, 0.07);
+        --text-primary: #0b1020;
+        --text-secondary: rgba(11, 16, 32, 0.74);
+        --text-muted: rgba(11, 16, 32, 0.56);
+        --border: rgba(11, 16, 32, 0.12);
+        --border-strong: rgba(11, 16, 32, 0.18);
+        --shadow: 0 24px 70px rgba(17, 24, 39, 0.12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1200px 800px at 80% -10%, rgba(139, 92, 246, 0.28), transparent 52%),
+        radial-gradient(900px 700px at 10% 10%, rgba(34, 197, 94, 0.14), transparent 48%),
+        linear-gradient(180deg, var(--bg-surface) 0%, color-mix(in srgb, var(--bg-surface) 92%, #000 8%) 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .shell {
+      width: min(100%, calc(var(--max) + 48px));
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0));
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 76px;
+      gap: 20px;
+    }
+
+    .brandmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), transparent 28%),
+        linear-gradient(135deg, var(--brand), #4f46e5);
+      box-shadow: 0 10px 30px var(--brand-glow);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ghost-link {
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+    }
+
+    .ghost-link:hover { color: var(--text-primary); }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, border-color 180ms ease, color 180ms ease;
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .button-primary {
+      background: linear-gradient(135deg, var(--cta), color-mix(in srgb, var(--cta) 76%, white 24%));
+      color: #04110a;
+      box-shadow: 0 18px 34px rgba(34, 197, 94, 0.24);
+    }
+
+    .button-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 22px 44px rgba(34, 197, 94, 0.28);
+      background: linear-gradient(135deg, var(--cta-hover), var(--cta));
+    }
+
+    .button-primary:active { transform: translateY(0); }
+
+    .button-secondary {
+      background: var(--bg-soft);
+      border-color: var(--border);
+      color: var(--text-primary);
+    }
+
+    .button-secondary:hover {
+      background: var(--bg-soft-2);
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .button:focus-visible,
+    a:focus-visible {
+      outline: 3px solid color-mix(in srgb, var(--brand) 72%, white 28%);
+      outline-offset: 3px;
+    }
+
+    main { overflow: clip; }
+
+    .hero {
+      position: relative;
+      min-height: calc(100svh - 76px);
+      display: grid;
+      align-items: center;
+      padding: 32px 0 54px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+      margin-bottom: 22px;
+    }
+
+    .pulse {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--cta);
+      box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+      animation: pulse 2.4s infinite;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+      70% { box-shadow: 0 0 0 14px rgba(34, 197, 94, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6.4rem);
+      line-height: 0.96;
+      letter-spacing: -0.06em;
+      max-width: 11ch;
+    }
+
+    .subheadline {
+      margin: 22px 0 0;
+      font-size: clamp(1.06rem, 1.8vw, 1.28rem);
+      line-height: 1.72;
+      color: var(--text-secondary);
+      max-width: 58ch;
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+      align-items: center;
+    }
+
+    .microcopy {
+      margin-top: 14px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .visual-panel {
+      position: relative;
+      min-height: 640px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(900px 500px at 20% 0%, rgba(139, 92, 246, 0.28), transparent 42%),
+        radial-gradient(700px 520px at 80% 12%, rgba(34, 197, 94, 0.16), transparent 44%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .visual-panel::before,
+    .visual-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      border-radius: 999px;
+      filter: blur(0px);
+      animation: drift 12s ease-in-out infinite;
+    }
+
+    .visual-panel::before {
+      width: 260px;
+      height: 260px;
+      right: -70px;
+      top: 70px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.38), rgba(139, 92, 246, 0.05) 62%, transparent 72%);
+    }
+
+    .visual-panel::after {
+      width: 190px;
+      height: 190px;
+      left: -40px;
+      bottom: 120px;
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.22), rgba(34, 197, 94, 0.04) 60%, transparent 72%);
+      animation-delay: -4s;
+    }
+
+    @keyframes drift {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(0, -18px, 0) scale(1.05); }
+    }
+
+    .mock-window {
+      position: absolute;
+      inset: 26px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(10, 14, 28, 0.75), rgba(10, 14, 28, 0.52)),
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.12);
+      overflow: hidden;
+    }
+
+    .window-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 18px 0;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+    }
+
+    .window-chip {
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(139, 92, 246, 0.14);
+      color: #ddd6fe;
+      font-size: 0.84rem;
+      border: 1px solid rgba(139, 92, 246, 0.22);
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 16px;
+      padding: 18px;
+      height: calc(100% - 54px);
+    }
+
+    .card {
+      border-radius: 22px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+
+    .hero-card {
+      display: grid;
+      gap: 18px;
+      padding: 22px;
+      align-content: start;
+    }
+
+    .metric {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .metric strong {
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      letter-spacing: -0.05em;
+      line-height: 0.9;
+    }
+
+    .metric span {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .sparkline {
+      height: 140px;
+      border-radius: 18px;
+      background:
+        linear-gradient(180deg, rgba(139, 92, 246, 0.1), rgba(34, 197, 94, 0.08)),
+        radial-gradient(circle at 20% 80%, rgba(34,197,94,0.34), transparent 14%),
+        radial-gradient(circle at 42% 52%, rgba(139,92,246,0.85), transparent 15%),
+        radial-gradient(circle at 64% 30%, rgba(34,197,94,0.78), transparent 13%),
+        radial-gradient(circle at 85% 60%, rgba(139,92,246,0.75), transparent 14%);
+      border: 1px solid rgba(255,255,255,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sparkline::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,0.12) 45%, transparent 55%);
+      transform: translateX(-120%);
+      animation: sheen 4.5s ease-in-out infinite;
+    }
+
+    @keyframes sheen {
+      0%, 55% { transform: translateX(-120%); }
+      100% { transform: translateX(120%); }
+    }
+
+    .stack {
+      display: grid;
+      gap: 16px;
+    }
+
+    .mini {
+      padding: 18px;
+    }
+
+    .mini h3,
+    .benefit h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .mini p,
+    .benefit p {
+      margin: 0;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 0.96rem;
+    }
+
+    .benefit-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      padding: 0 0 70px;
+      margin-top: -8px;
+    }
+
+    .benefit {
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    }
+
+    .benefit .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.24), rgba(34, 197, 94, 0.18));
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    footer {
+      padding: 8px 0 30px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .dash-grid,
+      .benefit-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-panel {
+        min-height: 560px;
+      }
+
+      h1 { max-width: 12ch; }
+    }
+
+    @media (max-width: 640px) {
+      .shell { padding: 0 16px; }
+      .nav { min-height: 70px; }
+      .ghost-link { display: none; }
+      .hero { padding-top: 18px; }
+      .visual-panel { min-height: 500px; }
+      .mock-window { inset: 16px; }
+      .dash-grid { padding: 14px; gap: 14px; }
+      .window-top { padding: 14px 14px 0; }
+      .button { width: 100%; }
+      .cta-row { align-items: stretch; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="shell">
+      <nav class="nav" aria-label="Primary">
+        <a class="brandmark" href="#top" aria-label="Home">
+          <span class="logo" aria-hidden="true"></span>
+          <span>NovaBeta</span>
+        </a>
+        <div class="nav-actions">
+          <a class="ghost-link" href="#benefits">Why it stands out</a>
+          <a class="button button-secondary" href="#signup">Sign in</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="kicker"><span class="pulse" aria-hidden="true"></span>Premium digital identity, built to impress</div>
+            <h1>A digital experience worth signing up for</h1>
+            <p class="subheadline">
+              Lean into the product’s sleek, digital identity so the page itself becomes part of the appeal.
+              The signup should feel like the obvious next step after a visually satisfying first impression.
+            </p>
+            <div class="cta-row" id="signup">
+              <a class="button button-primary" href="#join">Join the Beta</a>
+              <a class="button button-secondary" href="#benefits">Explore the value</a>
+            </div>
+            <p class="microcopy">Designed to feel premium, current, and easy to trust from the first glance.</p>
+          </div>
+
+          <div class="visual-panel" aria-label="Product visual storytelling">
+            <div class="mock-window">
+              <div class="window-top">
+                <div class="dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="window-chip">Live preview</div>
+              </div>
+
+              <div class="dash-grid">
+                <article class="card hero-card">
+                  <div class="metric">
+                    <div>
+                      <span class="window-chip" style="display:inline-flex; margin-bottom:12px;">Interface quality</span>
+                      <strong>98%</strong>
+                    </div>
+                    <span>desirability lift</span>
+                  </div>
+                  <div class="sparkline" aria-hidden="true"></div>
+                </article>
+
+                <div class="stack">
+                  <article class="card mini">
+                    <h3>Polished interface</h3>
+                    <p>Feels premium, current, and carefully crafted for a discerning audience.</p>
+                  </article>
+                  <article class="card mini">
+                    <h3>Visual storytelling</h3>
+                    <p>Every layer reinforces product desirability before the signup decision arrives.</p>
+                  </article>
+                  <article class="card mini">
+                    <h3>Clear next step</h3>
+                    <p>The signup sits naturally after the first impression lands, reducing friction.</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" id="benefits" aria-labelledby="benefits-title">
+      <div class="benefit-strip">
+        <article class="benefit">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>Polished interface that feels premium and current</h3>
+          <p>Dark, elegant surfaces, refined contrast, and confident spacing create an immediate sense of quality.</p>
+        </article>
+        <article class="benefit">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>Visual storytelling that reinforces product desirability</h3>
+          <p>Layered motion cues and immersive composition guide attention without overwhelming the message.</p>
+        </article>
+        <article class="benefit">
+          <div class="icon" aria-hidden="true"></div>
+          <h3>Clear next-step signup after the first impression lands</h3>
+          <p>The call to action arrives at the right moment, making “Join the Beta” feel like the natural move.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell">
+      <div class="footer-row">
+        <span>NovaBeta — crafted for a visually satisfying first impression.</span>
+        <span>Join the Beta · High-contrast, mobile-ready, and production-minded.</span>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Soul — Open-Source Wellness Builder</title>
+  <style>
+    :root {
+      --bg-page: #0b1110;
+      --bg-surface: #101917;
+      --bg-elevated: #14211d;
+      --bg-card: #162621;
+      --text-primary: #f3efe5;
+      --text-secondary: #c7d0c7;
+      --text-muted: #93a39a;
+      --brand: #2F6B4F;
+      --brand-strong: #3b8361;
+      --cta: #D9C27A;
+      --cta-text: #1a1a16;
+      --border: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(217, 194, 122, 0.35);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --max-width: 1160px;
+      --focus: 0 0 0 3px rgba(217, 194, 122, 0.35), 0 0 0 6px rgba(47, 107, 79, 0.35);
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-page: #f3f0e8;
+        --bg-surface: #f8f5ee;
+        --bg-elevated: #ffffff;
+        --bg-card: #ffffff;
+        --text-primary: #18201c;
+        --text-secondary: #35433d;
+        --text-muted: #617069;
+        --border: rgba(24, 32, 28, 0.10);
+        --border-strong: rgba(47, 107, 79, 0.25);
+        --shadow: 0 18px 50px rgba(16, 24, 20, 0.10);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(1200px 600px at 10% 10%, rgba(47, 107, 79, 0.22), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(217, 194, 122, 0.10), transparent 45%),
+        var(--bg-page);
+      color: var(--text-primary);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+      letter-spacing: 0.01em;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .wrap {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      backdrop-filter: blur(14px);
+      background: color-mix(in srgb, var(--bg-page) 72%, transparent);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+
+    .brandmark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brandmark-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 35%, rgba(217, 194, 122, 0.95), rgba(217, 194, 122, 0.18) 38%, transparent 40%),
+        linear-gradient(145deg, rgba(47, 107, 79, 1), rgba(47, 107, 79, 0.45));
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    .brandmark small {
+      display: block;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-top: 0.1rem;
+    }
+
+    main { padding: 2rem 0 4rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 2rem 0 1.25rem;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--bg-elevated) 92%, transparent), var(--bg-surface));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--cta);
+      font-size: 0.88rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 2.75rem;
+      height: 1px;
+      background: linear-gradient(90deg, var(--cta), transparent);
+      opacity: 0.8;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: "Avenir Next", "Nunito Sans", "DM Sans", Inter, system-ui, sans-serif;
+      font-size: clamp(2.7rem, 5vw, 5.1rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+    }
+
+    .subhead {
+      margin: 1.25rem 0 0;
+      max-width: 62ch;
+      color: var(--text-secondary);
+      font-size: clamp(1rem, 1.5vw, 1.12rem);
+    }
+
+    .benefits {
+      margin: 1.6rem 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .benefits li {
+      display: flex;
+      gap: 0.85rem;
+      align-items: flex-start;
+      color: var(--text-secondary);
+      padding: 0.95rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .check {
+      flex: 0 0 auto;
+      width: 1.45rem;
+      height: 1.45rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(47, 107, 79, 0.18);
+      color: var(--cta);
+      font-weight: 800;
+      font-size: 0.9rem;
+      margin-top: 0.05rem;
+      border: 1px solid rgba(47, 107, 79, 0.4);
+    }
+
+    .cta-row {
+      display: flex;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+      margin-top: 1.7rem;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.95rem 1.35rem;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 48px;
+    }
+
+    .btn-primary {
+      background: var(--cta);
+      color: var(--cta-text);
+      box-shadow: 0 12px 28px rgba(217, 194, 122, 0.18);
+    }
+
+    .btn-primary:hover { transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(1px) scale(0.99); }
+
+    .btn-ghost {
+      color: var(--text-primary);
+      background: transparent;
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(47, 107, 79, 0.12);
+      border-color: rgba(47, 107, 79, 0.45);
+    }
+
+    .btn:focus-visible,
+    a:focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+
+    .hero-aside {
+      padding: clamp(1.25rem, 3vw, 2rem);
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .module {
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      padding: 1rem;
+    }
+
+    .module h2, .module h3, .section-title {
+      margin: 0;
+      font-family: "Avenir Next", "Nunito Sans", "DM Sans", Inter, system-ui, sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    .module h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--text-primary);
+    }
+
+    .codeblock {
+      margin: 0;
+      border-radius: 16px;
+      padding: 1rem;
+      background: #08100e;
+      border: 1px solid rgba(255,255,255,0.08);
+      overflow-x: auto;
+      color: #d7e1da;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
+
+    .codeblock .kw { color: #d9c27a; }
+    .codeblock .fn { color: #7ed0a0; }
+    .codeblock .str { color: #9bd3c2; }
+    .codeblock .mut { color: #8ca19a; }
+
+    .mini-note {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin: 0.4rem 0 0;
+    }
+
+    .section {
+      padding: 1.2rem 0 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 2.4vw, 2rem);
+    }
+
+    .section-copy {
+      color: var(--text-muted);
+      max-width: 62ch;
+      margin: 0.35rem 0 0;
+    }
+
+    .examples {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      padding: 1.2rem;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      min-height: 100%;
+    }
+
+    .card h3 {
+      margin: 0 0 0.65rem;
+      font-size: 1.08rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .card .tag {
+      display: inline-flex;
+      margin-bottom: 0.9rem;
+      color: var(--cta);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contrib {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1rem;
+      align-items: center;
+      padding: 1.3rem 1.4rem;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(135deg, rgba(47, 107, 79, 0.18), rgba(255,255,255,0.02)),
+        var(--bg-elevated);
+    }
+
+    .contrib strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .contrib p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 70ch;
+    }
+
+    footer {
+      padding: 2rem 0 2.5rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 920px) {
+      .hero,
+      .examples,
+      .contrib {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy { min-height: auto; }
+      .section-head { align-items: start; flex-direction: column; }
+    }
+
+    @media (max-width: 640px) {
+      main { padding-top: 1rem; }
+      .topbar { padding: 0.9rem 0; }
+      .brandmark small { display: none; }
+      h1 { max-width: 13ch; }
+      .hero-copy, .hero-aside { padding: 1.1rem; }
+      .btn { width: 100%; }
+      .cta-row { flex-direction: column; align-items: stretch; }
+      .contrib { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap topbar">
+      <a class="brandmark" href="#top" aria-label="Soul home">
+        <span class="brandmark-mark" aria-hidden="true"></span>
+        <span>
+          Soul
+          <small>Open-source wellness foundation</small>
+        </span>
+      </a>
+      <a class="btn btn-ghost" href="#repository">Repository</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <article class="panel hero-copy">
+          <div class="eyebrow">Calm Open-Source Builder</div>
+          <h1 id="hero-title">Build wellness tools that feel like your practice</h1>
+          <p class="subhead">
+            Soul gives yoga-minded developers an open-source foundation to shape nature-inspired experiences without fighting the product. Customize it, inspect it, and contribute back with a system that stays calm, clear, and flexible.
+          </p>
+
+          <ul class="benefits" aria-label="Key benefits">
+            <li><span class="check" aria-hidden="true">✓</span> Open-source codebase you can inspect and extend</li>
+            <li><span class="check" aria-hidden="true">✓</span> Customization paths for wellness-focused experiences</li>
+            <li><span class="check" aria-hidden="true">✓</span> Contribution-friendly structure for community-driven development</li>
+          </ul>
+
+          <div class="cta-row">
+            <a class="btn btn-primary" id="repository" href="#examples">View the Repository</a>
+            <a class="btn btn-ghost" href="#contribute">See how to contribute</a>
+          </div>
+        </article>
+
+        <aside class="panel hero-aside" aria-label="Code-first customization preview">
+          <div class="module">
+            <h3>Theme override</h3>
+            <pre class="codeblock"><code><span class="kw">:root</span> {
+  <span class="mut">--brand</span>: <span class="str">#2F6B4F</span>;
+  <span class="mut">--cta</span>: <span class="str">#D9C27A</span>;
+  <span class="mut">--radius</span>: <span class="str">24px</span>;
+}</code></pre>
+            <p class="mini-note">Tune the look without breaking the system tone.</p>
+          </div>
+
+          <div class="module">
+            <h3>Component extension</h3>
+            <pre class="codeblock"><code><span class="kw">export</span> <span class="kw">function</span> <span class="fn">PracticeCard</span>() {
+  <span class="kw">return</span> <span class="str">"breath-led flow"</span>;
+}</code></pre>
+            <p class="mini-note">Keep the architecture readable, composable, and calm.</p>
+          </div>
+        </aside>
+      </section>
+
+      <section class="section" id="examples" aria-labelledby="examples-title">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title" id="examples-title">Code-first customization examples</h2>
+            <p class="section-copy">
+              Start with an opinionated foundation, then adapt the palette, layout, and interaction model for meditations, classes, journaling, or recovery tools.
+            </p>
+          </div>
+        </div>
+
+        <div class="examples">
+          <article class="card">
+            <div class="tag">Branding</div>
+            <h3>Swap the mood, keep the structure</h3>
+            <p>Use CSS variables to align the interface with your studio, coach, or retreat brand while maintaining accessible contrast and system consistency.</p>
+          </article>
+
+          <article class="card">
+            <div class="tag">Experience</div>
+            <h3>Shape flows for rituals, not features</h3>
+            <p>Compose screens around breathwork timers, class libraries, habit tracking, or gentle reminders with components that stay light and legible.</p>
+          </article>
+
+          <article class="card">
+            <div class="tag">Community</div>
+            <h3>Contribute improvements upstream</h3>
+            <p>Fork, refine, and submit changes back with a repository model designed to welcome shared upkeep and thoughtful evolution.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="contribute" aria-labelledby="contribute-title">
+        <div class="contrib">
+          <div>
+            <h2 class="section-title" id="contribute-title">Contributor path, without the friction</h2>
+            <p>
+              The structure is intentionally lightweight: clear tokens, readable patterns, and room for the community to add new wellness-focused modules without disrupting the core experience.
+            </p>
+          </div>
+          <a class="btn btn-primary" href="#top">View the Repository</a>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      Soul — open-source wellness tools designed for calm customization and community contribution.
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yogi Landing Page</title>
+    <style>
+        :root {
+            --bg-surface: #121212;
+            --text-primary: #FFFFFF;
+            --brand: #5B7C6A;
+            --cta: #D9B26B;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            color: var(--text-primary);
+            background-color: var(--bg-surface);
+            line-height: 1.6;
+        }
+
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-image: url('https://source.unsplash.com/1600x900/?nature,zen');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.75);
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin: 1em 0;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.75);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2em;
+            text-align: center;
+        }
+
+        section {
+            margin: 2em 0;
+            max-width: 600px;
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 1em 0;
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: var(--bg-surface);
+            padding: 1em 2em;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-button:hover {
+            background-color: rgba(217, 178, 107, 0.8);
+            transform: scale(1.05);
+        }
+
+        .cta-button:focus {
+            outline: 3px solid var(--brand);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: var(--text-primary);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1em;
+            }
+            .cta-button {
+                padding: 0.8em 1.5em;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Step into a calmer state of mind.</h1>
+        <h2>Yogi uses a nature-forward wellness aesthetic to make the experience feel serene from the first screen.</h2>
+    </header>
+    <main>
+        <section>
+            <p>Atmospheric experience aligned with wellness intent.</p>
+            <p>Emotionally persuasive first impression.</p>
+            <p>Simple conversion path that avoids clutter.</p>
+        </section>
+        <button class="cta-button" aria-label="Enter Yogi">Enter Yogi</button>
+    </main>
+    <footer>
+        <p>&copy; 2023 Yogi. All rights reserved.</p>
+    </footer>
+</body>
+</html>

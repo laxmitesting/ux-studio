@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calm Community Anticipation</title>
+    <style>
+        :root {
+            --bg-surface: #1c1c1c;
+            --text-primary: #e0e0e0;
+            --brand: #2E5E4E;
+            --cta: #C9A66B;
+            --cta-hover: #d9bc8c;
+            --font-family-serif: 'Times New Roman', Times, serif;
+            --font-family-sans: 'Arial', sans-serif;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-family-serif);
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            padding: 40px;
+            text-align: center;
+            background-color: var(--brand);
+        }
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            gap: 20px;
+        }
+        section {
+            background: #242424;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+        h2 {
+            font-size: 1.5em;
+            color: var(--text-primary);
+            margin: 15px 0;
+        }
+        p {
+            margin: 10px 0;
+            line-height: 1.5;
+        }
+        .cta-button {
+            background: var(--cta);
+            color: var(--bg-surface);
+            border: none;
+            border-radius: 5px;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: var(--font-family-sans);
+        }
+        .cta-button:hover {
+            background: var(--cta-hover);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--brand);
+        }
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            header, footer {
+                background-color: var(--brand);
+            }
+            section {
+                background: #f9f9f9;
+                color: #000000;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Be first in the community shaping yogi.</h1>
+        <h2>For practitioners who want more than a product, yogi offers an early invitation into a wellness-minded community rooted in nature and calm living. Join the waitlist to get updates and be among the first to experience it.</h2>
+    </header>
+    <main>
+        <section>
+            <h2>Community-led Positioning</h2>
+            <p>Connect with wellness-oriented users who share similar values.</p>
+        </section>
+        <section>
+            <h2>Early Access Framing</h2>
+            <p>Get excited with anticipation of early access, tailored updates, and exclusive insights.</p>
+        </section>
+        <section>
+            <h2>Natural and Serene Brand Tone</h2>
+            <p>Experience a mindful journey that matches your calm lifestyle.</p>
+        </section>
+        <section>
+            <h2>Join the Community</h2>
+            <button class="cta-button">Join the Community</button>
+        </section>
+    </main>
+    <footer>
+        © 2023 Yogi Community. All Rights Reserved.
+    </footer>
+</body>
+</html>

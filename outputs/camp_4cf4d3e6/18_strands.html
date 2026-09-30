@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outdoor Plans Without Guesswork</title>
+    <style>
+        :root {
+            --bg-surface: #ffffff;
+            --text-primary: #333333;
+            --brand: #355C7D;
+            --cta: #C8553D;
+            --cta-hover: #d36e52;
+            --font-family: 'Arial', sans-serif;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+            background-color: var(--brand);
+            color: white;
+        }
+        main {
+            flex-grow: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+        section {
+            background: #f9f9f9;
+            border: 1px solid #e1e1e1;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        h1 {
+            font-size: 1.8em;
+            margin: 0;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: var(--text-primary);
+        }
+        p {
+            flex-grow: 1;
+        }
+        .cta-button {
+            background: var(--cta);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .cta-button:hover {
+            background: var(--cta-hover);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: var(--brand);
+            color: white;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #1a1a1a;
+                color: #ffffff;
+            }
+            section {
+                background: #2a2a2a;
+                border: 1px solid #444;
+            }
+            h2 {
+                color: #d9d9d9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Plan around rain before it changes your day</h1>
+        <h2>Rain gives Londoners a faster way to decide whether an outdoor plan is worth it. Use the weather view to choose the right time, adjust plans, or bring what you need.</h2>
+    </header>
+    <main>
+        <section>
+            <h2>Make better decisions</h2>
+            <p>For walks, picnics, and outdoor meetups, easily gauge the weather to ensure a great time outside.</p>
+            <button class="cta-button">Plan with confidence</button>
+        </section>
+        <section>
+            <h2>Quick weather insights</h2>
+            <p>Access weather information in a format that supports your planning needs quickly.</p>
+            <button class="cta-button">Plan with confidence</button>
+        </section>
+        <section>
+            <h2>Avoid last-minute changes</h2>
+            <p>Our platform helps you avoid unnecessary disruptions to your carefully made plans.</p>
+            <button class="cta-button">Plan with confidence</button>
+        </section>
+    </main>
+    <footer>
+        © 2023 Outdoor Plans. All Rights Reserved.
+    </footer>
+</body>
+</html>

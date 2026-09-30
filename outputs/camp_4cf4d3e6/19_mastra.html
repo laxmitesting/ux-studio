@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Outfits</title>
+    <style>
+        :root {
+            --bg-surface: #1A1A1A;
+            --text-primary: #FFFFFF;
+            --brand: #5D5C61;
+            --cta: #D97706;
+            --hover-cta: #BF6B03;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--brand);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--cta);
+        }
+
+        h2 {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: var(--cta);
+            color: var(--text-primary);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: var(--hover-cta);
+        }
+
+        button:focus {
+            outline: 2px solid var(--hover-cta);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--text-primary);
+            }
+            section {
+                background-color: var(--brand);
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 20px;
+            }
+            h2 {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Know what London weather means for what you wear</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Rain turns weather into an easy daily decision tool.</h2>
+            <p>Check conditions fast so you can choose the right layers, shoes, or umbrella before heading out.</p>
+            <h3>Key Benefits:</h3>
+            <ul>
+                <li>Translate weather into practical outfit decisions</li>
+                <li>Spot rain risk before leaving home</li>
+                <li>Avoid overpacking or underdressing</li>
+            </ul>
+            <button>See today’s weather</button>
+        </section>
+    </main>
+    <footer>
+        <p style="text-align:center; margin-top:20px;">&copy; 2023 Weather Outfit Guide</p>
+    </footer>
+</body>
+</html>

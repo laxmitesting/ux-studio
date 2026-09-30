@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Synapse Engine — See What It Does in Seconds</title>
+  <meta name="description" content="Explore core capabilities in an instant. A high-density bento architecture built for fast technical evaluation.">
+  <style>
+    :root {
+      --bg-canvas: #f8fafc;
+      --bg-surface: #ffffff;
+      --bg-subtle: #f1f5f9;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #94a3b8;
+      --brand: #0ea5e9;
+      --brand-tint: #f0f9ff;
+      --brand-border: #bae6fd;
+      --brand-glow: rgba(14, 165, 233, 0.15);
+      --cta: #111827;
+      --cta-hover: #1f2937;
+      --cta-active: #030712;
+      --cta-text: #ffffff;
+      --border: #e2e8f0;
+      --border-focus: #0ea5e9;
+      --code-bg: #0f172a;
+      --code-text: #e2e8f0;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", sans-serif;
+      --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-canvas: #090d16;
+        --bg-surface: #111827;
+        --bg-subtle: #1f2937;
+        --text-primary: #f8fafc;
+        --text-secondary: #94a3b8;
+        --text-muted: #64748b;
+        --brand: #38bdf8;
+        --brand-tint: rgba(56, 189, 248, 0.1);
+        --brand-border: rgba(56, 189, 248, 0.25);
+        --border: #1e293b;
+        --cta: #f8fafc;
+        --cta-hover: #e2e8f0;
+        --cta-active: #cbd5e1;
+        --cta-text: #090d16;
+        --code-bg: #030712;
+      }
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      color-scheme: light dark;
+    }
+
+    body {
+      background-color: var(--bg-canvas);
+      color: var(--text-primary);
+      font-family: var(--font-sans);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Top Navigation */
+    header.site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background-color: rgba(248, 250, 252, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (prefers-color-scheme: dark) {
+      header.site-header {
+        background-color: rgba(9, 13, 22, 0.85);
+      }
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: var(--text-primary);
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--brand);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .nav-link {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--brand);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 0.875rem;
+      font-weight: 600;
+      border-radius: var(--radius-sm);
+      padding: 10px 18px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s ease-in-out;
+      border: 1px solid transparent;
+      white-space: nowrap;
+    }
+
+    .btn:focus-visible {
+      outline: 2px solid var(--border-focus);
+      outline-offset: 2px;
+    }
+
+    .btn-primary {
+      background-color: var(--cta);
+      color: var(--cta-text);
+      border-color: var(--cta);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--cta-hover);
+      border-color: var(--cta-hover);
+    }
+
+    .btn-primary:active {
+      background-color: var(--cta-active);
+      transform: translateY(1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--bg-subtle);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 64px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background-color: var(--brand-tint);
+      border: 1px solid var(--brand-border);
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--brand);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-title span {
+      color: var(--brand);
+    }
+
+    .hero-desc {
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 720px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .meta-pills {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+
+    .pill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    .pill-item svg {
+      color: var(--brand);
+      flex-shrink: 0;
+    }
+
+    /* Bento Feature Clusters */
+    .feature-clusters {
+      display: flex;
+      flex-direction: column;
+      gap: 80px;
+      padding-bottom: 96px;
+    }
+
+    .cluster-header {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .cluster-tag {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand);
+    }
+
+    .cluster-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+    }
+
+    .cluster-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      max-width: 600px;
+    }
+
+    /* Grid Layouts */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .bento-card {
+      background-color: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .bento-card:hover {
+      border-color: var(--brand-border);
+      box-shadow: var(--shadow-card);
+    }
+
+    /* Bento Spans */
+    .col-4 { grid-column: span 4; }
+    .col-6 { grid-column: span 6; }
+    .col-8 { grid-column: span 8; }
+    .col-12 { grid-column: span 12; }
+
+    @media (max-width: 960px) {
+      .col-4, .col-6, .col-8 { grid-column: span 12; }
+    }
+
+    .card-top {
+      margin-bottom: 18px;
+    }
+
+    .card-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .card-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: var(--bg-subtle);
+      color: var(--text-secondary);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: var(--font-mono);
+    }
+
+    .card-badge.highlight {
+      background: var(--brand-tint);
+      color: var(--brand);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+      color: var(--text-primary);
+    }
+
+    .card-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .card-visual {
+      margin-top: 16px;
+      background-color: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+    }
+
+    /* Visual Micro-Components */
+    .code-preview {
+      background: var(--code-bg);
+      color: var(--code-text);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      overflow-x: auto;
+      line-height: 1.4;
+    }
+
+    .code-accent { color: var(--brand); }
+    .code-mute { color: #64748b; }
+
+    .stat-cluster {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-around;
+      padding: 12px 0;
+    }
+
+    .stat-point {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--brand);
+      letter-spacing: -0.02em;
+    }
+
+    .stat-lbl {
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .signal-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: #10b981;
+      font-weight: 600;
+    }
+
+    .signal-indicator::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background-color: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    }
+
+    /* Embedded Signup Prompt Banner */
+    .cluster-signup {
+      background: var(--bg-surface);
+      border: 1px dashed var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      background-image: radial-gradient(var(--brand-glow) 1px, transparent 1px);
+      background-size: 16px 16px;
+    }
+
+    .signup-text {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .signup-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .signup-subtitle {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    .signup-form {
+      display: flex;
+      gap: 8px;
+      min-width: 320px;
+    }
+
+    @media (max-width: 640px) {
+      .signup-form {
+        width: 100%;
+        flex-direction: column;
+        min-width: 100%;
+      }
+    }
+
+    .input-field {
+      flex: 1;
+      padding: 8px 12px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      outline: none;
+      font-family: inherit;
+      transition: border-color 0.15s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 1px var(--border-focus);
+    }
+
+    /* Footer */
+    footer.site-footer {
+      border-top: 1px solid var(--border);
+      background-color: var(--bg-surface);
+      padding: 48px 0 36px;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--brand);
+    }
+
+    .system-health {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    .pulse {
+      width: 8px;
+      height: 8px;
+      background: #10b981;
+      border-radius: 50%;
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-ring {
+      0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+      70% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-mark" aria-label="Synapse Engine Home">
+        <div class="brand-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+          </svg>
+        </div>
+        <span>Synapse</span>
+      </a>
+
+      <nav aria-label="Quick Navigation">
+        <ul class="nav-links">
+          <li><a href="#pipeline" class="nav-link">Pipeline</a></li>
+          <li><a href="#dx" class="nav-link">Developer API</a></li>
+          <li><a href="#security" class="nav-link">Observability</a></li>
+        </ul>
+      </nav>
+
+      <a href="#pipeline" class="btn btn-outline" style="padding: 7px 14px; font-size: 0.8rem;">Console Demo</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero-badge">Feature-First Architecture</div>
+        <h1 class="hero-title">See what it does in <span>seconds</span></h1>
+        <p class="hero-desc">
+          A compact suite of capabilities built for engineering evaluation.
+          Scan features at scale, inspect payload mechanics, and spin up an environment right from the card you care about.
+        </p>
+        <div class="hero-actions">
+          <a href="#pipeline" class="btn btn-primary">Explore Features</a>
+          <a href="#dx" class="btn btn-outline">Read Technical Spec</a>
+        </div>
+
+        <div class="meta-pills">
+          <div class="pill-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Fast scan of core capabilities
+          </div>
+          <div class="pill-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Zero friction, 3-minute evaluation
+          </div>
+          <div class="pill-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            Predictable pay-per-compute cost
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bento Clusters -->
+    <div class="container feature-clusters">
+
+      <!-- Cluster 01: Core Ingestion Engine -->
+      <section id="pipeline" class="cluster-section" aria-labelledby="c1-title">
+        <div class="cluster-header">
+          <span class="cluster-tag">CLUSTER 01 // INGESTION & PIPELINES</span>
+          <h2 id="c1-title" class="cluster-title">High-Throughput Event Streaming</h2>
+          <p class="cluster-desc">Eliminate Kafka sprawl. Ingest, parse, and persist telemetry events with sub-millisecond edge resolution.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 1.1 -->
+          <article class="bento-card col-8">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge highlight">Sub-10ms Global Latency</span>
+                <span class="signal-indicator">99.999% SLA Live</span>
+              </div>
+              <h3 class="card-title">Edge Buffer & Stateful Stream Transform</h3>
+              <p class="card-desc">Batch, window, and filter JSON or Protobuf payloads on 280+ distributed PoPs before persisting downstream.</p>
+            </div>
+            <div class="card-visual">
+              <div class="stat-cluster">
+                <div class="stat-point">
+                  <span class="stat-val">2.8M</span>
+                  <span class="stat-lbl">Events / Sec</span>
+                </div>
+                <div class="stat-point">
+                  <span class="stat-val">4.2ms</span>
+                  <span class="stat-lbl">Median Ack</span>
+                </div>
+                <div class="stat-point">
+                  <span class="stat-val">0.00%</span>
+                  <span class="stat-lbl">Drop Ratio</span>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Bento 1.2 -->
+          <article class="bento-card col-4">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge">Auto-Schema</span>
+              </div>
+              <h3 class="card-title">Dynamic Typing</h3>
+              <p class="card-desc">Self-healing schema mutations without worker deployment restarts.</p>
+            </div>
+            <div class="card-visual">
+              <div class="code-preview">
+                <span class="code-mute">// Inferring struct</span><br>
+                <span class="code-accent">payload</span>.auto_cast()<br>
+                &rarr; schema_v4_ok
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Embedded Signup Prompt 1 -->
+        <div class="cluster-signup">
+          <div class="signup-text">
+            <strong class="signup-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polyline></svg>
+              Ready to test ingestion throughput?
+            </strong>
+            <span class="signup-subtitle">Spin up a pipeline in 30 seconds with 50,000 free events. No card required.</span>
+          </div>
+          <form class="signup-form" onsubmit="event.preventDefault(); alert('Pipeline sandbox provisioned!');">
+            <input type="email" class="input-field" placeholder="developer@company.com" required aria-label="Work email for Ingestion Sandbox">
+            <button type="submit" class="btn btn-primary">Start Ingesting</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Cluster 02: Developer DX & Interface -->
+      <section id="dx" class="cluster-section" aria-labelledby="c2-title">
+        <div class="cluster-header">
+          <span class="cluster-tag">CLUSTER 02 // DEVELOPER ERGONOMICS</span>
+          <h2 id="c2-title" class="cluster-title">Zero-Boilerplate Integration</h2>
+          <p class="cluster-desc">Designed for developers who refuse to read 200 pages of SDK docs just to store and query telemetry.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 2.1 -->
+          <article class="bento-card col-4">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge">REST & gRPC</span>
+              </div>
+              <h3 class="card-title">Unified Payload Envelope</h3>
+              <p class="card-desc">One single signature standard across all transports. Swap protocols dynamically without rewrites.</p>
+            </div>
+            <div class="card-visual">
+              <div class="code-preview">
+                synapse.pipe({<br>
+                &nbsp;&nbsp;id: <span class="code-accent">"usr_889"</span>,<br>
+                &nbsp;&nbsp;sync: <span class="code-accent">true</span><br>
+                });
+              </div>
+            </div>
+          </article>
+
+          <!-- Bento 2.2 -->
+          <article class="bento-card col-4">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge highlight">WASM Filters</span>
+              </div>
+              <h3 class="card-title">Serverless Middleware</h3>
+              <p class="card-desc">Upload Rust or Go binaries directly to inspect, mask PII, or encrypt columns in flight.</p>
+            </div>
+            <div class="card-visual" style="text-align: center; color: var(--text-secondary);">
+              <span style="font-size: 0.8rem; font-weight: 600;">Runtime: V8 Isolate sandboxing</span>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">&lt; 0.2ms overhead</span>
+            </div>
+          </article>
+
+          <!-- Bento 2.3 -->
+          <article class="bento-card col-4">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge">Real-Time Tail</span>
+              </div>
+              <h3 class="card-title">Instant CLI Debugging</h3>
+              <p class="card-desc">Stream live terminal feeds directly from your clusters with zero port forwarding.</p>
+            </div>
+            <div class="card-visual">
+              <div class="code-preview">
+                $ synapse tail -f --live<br>
+                <span class="code-accent">CONNECTED</span> // prod-node-9
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Embedded Signup Prompt 2 -->
+        <div class="cluster-signup">
+          <div class="signup-text">
+            <strong class="signup-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+              Get immediate API sandbox credentials
+            </strong>
+            <span class="signup-subtitle">Receive a pre-authenticated token and sandbox endpoint directly via email.</span>
+          </div>
+          <form class="signup-form" onsubmit="event.preventDefault(); alert('API keys dispatched to your email.');">
+            <input type="email" class="input-field" placeholder="name@domain.tech" required aria-label="Email for API key delivery">
+            <button type="submit" class="btn btn-primary">Generate API Key</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Cluster 03: Observability & Security -->
+      <section id="security" class="cluster-section" aria-labelledby="c3-title">
+        <div class="cluster-header">
+          <span class="cluster-tag">CLUSTER 03 // AUDIT & GOVERNANCE</span>
+          <h2 id="c3-title" class="cluster-title">Enterprise Control Without Complexity</h2>
+          <p class="cluster-desc">Automated regulatory attestation and cryptographic trail tracing baked directly into the engine.</p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento 3.1 -->
+          <article class="bento-card col-6">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge highlight">SOC2 & HIPAA</span>
+              </div>
+              <h3 class="card-title">Immutable Audit Chains</h3>
+              <p class="card-desc">Every database write, transformation rule alteration, and consumer handshake is cryptographically hashed to an append-only ledger.</p>
+            </div>
+            <div class="card-visual">
+              <div class="code-preview">
+                SHA-256 [00f12..ba91] <span class="code-accent">&check; SIGNED</span><br>
+                Root Merkle verification: VALID
+              </div>
+            </div>
+          </article>
+
+          <!-- Bento 3.2 -->
+          <article class="bento-card col-6">
+            <div class="card-top">
+              <div class="card-header-row">
+                <span class="card-badge">RBAC / ABAC</span>
+              </div>
+              <h3 class="card-title">Scoped Service Boundaries</h3>
+              <p class="card-desc">Generate zero-trust short-lived tokens limited to specific topics, regions, or rate buckets.</p>
+            </div>
+            <div class="card-visual">
+              <div class="stat-cluster">
+                <div class="stat-point">
+                  <span class="stat-val">15m</span>
+                  <span class="stat-lbl">Token Expiry</span>
+                </div>
+                <div class="stat-point">
+                  <span class="stat-val">mTLS</span>
+                  <span class="stat-lbl">Enforced</span>
+                </div>
+                <div class="stat-point">
+                  <span class="stat-val">Zero</span>
+                  <span class="stat-lbl">Trust Model</span>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Embedded Signup Prompt 3 -->
+        <div class="cluster-signup">
+          <div class="signup-text">
+            <strong class="signup-title">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+              Evaluating enterprise security compliance?
+            </strong>
+            <span class="signup-subtitle">Download our automated SOC2 report package or request a dedicated VPC trial.</span>
+          </div>
+          <form class="signup-form" onsubmit="event.preventDefault(); alert('Security package sent.');">
+            <input type="email" class="input-field" placeholder="security@enterprise.com" required aria-label="Email for compliance package">
+            <button type="submit" class="btn btn-primary">Request Report</button>
+          </form>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-left">
+          <div class="brand-mark" style="font-size: 0.95rem;">
+            <div class="brand-icon" style="width: 22px; height: 22px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <span>Synapse Data Systems, Inc.</span>
+          </div>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Evaluation framework v4.12.0 &bull; Built for swift engineering reviews.</p>
+        </div>
+
+        <ul class="footer-links">
+          <li><a href="#pipeline">Capabilities</a></li>
+          <li><a href="#dx">API Docs</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="#">Privacy</a></li>
+        </ul>
+
+        <div class="system-health">
+          <span class="pulse"></span>
+          <span>All regions operational</span>
+        </div>
+      </div>
+      <div style="border-top: 1px solid var(--border); padding-top: 20px; font-size: 0.75rem; color: var(--text-muted); text-align: center;">
+        &copy; 2025 Synapse Engine. All trademarks belong to their respective owners.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>yogi — Bring your practice back to nature.</title>
+  <style>
+    :root {
+      --bg-surface: #0c120f;
+      --bg-elevated: #111a15;
+      --bg-card: rgba(255, 255, 255, 0.04);
+      --bg-card-strong: rgba(255, 255, 255, 0.07);
+      --text-primary: #f3eee6;
+      --text-secondary: rgba(243, 238, 230, 0.78);
+      --text-muted: rgba(243, 238, 230, 0.58);
+      --brand: #3A6B4F;
+      --brand-2: #5f8c6b;
+      --cta: #E3B36A;
+      --cta-hover: #f0c57c;
+      --ring: rgba(227, 179, 106, 0.55);
+      --border: rgba(255, 255, 255, 0.10);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --max-width: 1180px;
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-surface: #f3efe7;
+        --bg-elevated: #fbf8f2;
+        --bg-card: rgba(58, 107, 79, 0.06);
+        --bg-card-strong: rgba(58, 107, 79, 0.10);
+        --text-primary: #16201a;
+        --text-secondary: rgba(22, 32, 26, 0.78);
+        --text-muted: rgba(22, 32, 26, 0.58);
+        --border: rgba(22, 32, 26, 0.12);
+        --shadow: 0 20px 50px rgba(22, 32, 26, 0.12);
+        --ring: rgba(58, 107, 79, 0.28);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", Times, serif;
+      background:
+        radial-gradient(1200px 700px at 20% 15%, rgba(58, 107, 79, 0.30), transparent 45%),
+        radial-gradient(900px 600px at 85% 20%, rgba(227, 179, 106, 0.10), transparent 40%),
+        linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%),
+        var(--bg-surface);
+      color: var(--text-primary);
+      line-height: 1.55;
+      min-height: 100vh;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input { font: inherit; }
+
+    .page {
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .container {
+      width: min(calc(100% - 2rem), var(--max-width));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      padding: 1.25rem 0 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-mark {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--text-primary);
+      letter-spacing: 0.04em;
+      font-size: 0.95rem;
+      text-transform: lowercase;
+    }
+
+    .brand-mark .dot {
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-2));
+      box-shadow: 0 0 0 6px rgba(58, 107, 79, 0.14);
+    }
+
+    .hero {
+      position: relative;
+      min-height: calc(100vh - 1.25rem);
+      display: grid;
+      align-items: center;
+      padding: 2rem 0 3rem;
+    }
+
+    .hero-shell {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-copy {
+      padding: clamp(0.5rem, 1vw, 1rem) 0;
+      max-width: 42rem;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-secondary);
+      background: rgba(255,255,255,0.03);
+      box-shadow: var(--shadow);
+      margin-bottom: 1.25rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 999px;
+      background: var(--cta);
+      box-shadow: 0 0 0 4px rgba(227, 179, 106, 0.16);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 7vw, 6.35rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+      max-width: 10ch;
+      text-wrap: balance;
+    }
+
+    .subhead {
+      margin: 1.3rem 0 0;
+      font-size: clamp(1.05rem, 1.9vw, 1.32rem);
+      max-width: 46rem;
+      color: var(--text-secondary);
+      text-wrap: pretty;
+    }
+
+    .benefits {
+      margin-top: 2rem;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .benefit {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+      padding: 1rem 1rem 1rem 1.05rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: linear-gradient(180deg, var(--bg-card-strong), var(--bg-card));
+      backdrop-filter: blur(12px);
+    }
+
+    .benefit .check {
+      flex: 0 0 auto;
+      width: 1.55rem;
+      height: 1.55rem;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(58, 107, 79, 0.18);
+      color: #c8e0cf;
+      border: 1px solid rgba(58, 107, 79, 0.35);
+      margin-top: 0.1rem;
+      font-size: 0.95rem;
+    }
+
+    .benefit p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .cta-block {
+      margin-top: 2.1rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .cta-button {
+      appearance: none;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.35rem;
+      border-radius: 999px;
+      background: var(--cta);
+      color: #1d1710;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      box-shadow: 0 18px 35px rgba(227, 179, 106, 0.22);
+      transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease, filter 180ms ease;
+      min-height: 3.2rem;
+    }
+
+    .cta-button:hover {
+      background: var(--cta-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 22px 40px rgba(227, 179, 106, 0.28);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+      filter: saturate(0.96);
+    }
+
+    .cta-button:focus-visible {
+      outline: 3px solid var(--ring);
+      outline-offset: 4px;
+    }
+
+    .microcopy {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 28rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 34rem;
+      border-radius: var(--radius-xl);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      background:
+        linear-gradient(180deg, rgba(8, 12, 10, 0.18), rgba(8, 12, 10, 0.72)),
+        radial-gradient(700px 500px at 30% 20%, rgba(227, 179, 106, 0.20), transparent 45%),
+        linear-gradient(145deg, #355241 0%, #101713 52%, #0b100d 100%);
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 28%, rgba(239, 232, 214, 0.24), transparent 14%),
+        radial-gradient(circle at 75% 22%, rgba(227, 179, 106, 0.18), transparent 12%),
+        radial-gradient(circle at 64% 72%, rgba(58, 107, 79, 0.52), transparent 18%),
+        linear-gradient(135deg, rgba(255,255,255,0.12), transparent 38%);
+      mix-blend-mode: screen;
+      opacity: 0.8;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: end center;
+      padding: 1.25rem;
+    }
+
+    .scene-card {
+      width: min(100%, 31rem);
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.05));
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(12px);
+      padding: 1rem;
+      color: #f6f2ea;
+    }
+
+    .scene-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.9rem;
+      color: rgba(246, 242, 234, 0.82);
+      font-size: 0.92rem;
+    }
+
+    .scene-pill {
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(227, 179, 106, 0.16);
+      border: 1px solid rgba(227, 179, 106, 0.24);
+      color: #fff2d7;
+    }
+
+    .scene-figure {
+      position: relative;
+      aspect-ratio: 16 / 13;
+      border-radius: 20px;
+      overflow: hidden;
+      background:
+        radial-gradient(500px 260px at 50% 82%, rgba(58, 107, 79, 0.95), rgba(17, 26, 21, 0.0) 70%),
+        linear-gradient(180deg, rgba(248, 230, 191, 0.22), rgba(248, 230, 191, 0) 20%),
+        linear-gradient(180deg, #395243 0%, #1a2620 45%, #0f1512 100%);
+    }
+
+    .mist {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(120px 70px at 30% 25%, rgba(255,255,255,0.14), transparent 72%),
+        radial-gradient(150px 80px at 72% 18%, rgba(255,255,255,0.10), transparent 72%),
+        radial-gradient(200px 120px at 54% 56%, rgba(255,255,255,0.07), transparent 72%);
+      opacity: 0.85;
+    }
+
+    .tree {
+      position: absolute;
+      bottom: 0;
+      width: 38%;
+      height: 78%;
+      left: 6%;
+      background: linear-gradient(180deg, rgba(44, 72, 56, 0.0) 0%, rgba(44, 72, 56, 0.0) 18%, rgba(44, 72, 56, 0.9) 18%, rgba(21, 31, 25, 1) 100%);
+      clip-path: polygon(45% 0, 55% 0, 61% 18%, 72% 31%, 57% 34%, 67% 50%, 50% 49%, 56% 66%, 40% 64%, 45% 83%, 27% 82%, 33% 60%, 17% 61%, 24% 43%, 10% 38%, 22% 24%, 33% 17%);
+      filter: drop-shadow(0 0 24px rgba(0,0,0,0.2));
+      opacity: 0.95;
+    }
+
+    .mountain {
+      position: absolute;
+      bottom: 12%;
+      width: 58%;
+      height: 48%;
+      right: -2%;
+      background: linear-gradient(180deg, rgba(214, 204, 176, 0.24), rgba(20, 29, 24, 0.8));
+      clip-path: polygon(0 100%, 14% 58%, 34% 26%, 47% 41%, 61% 15%, 78% 35%, 100% 100%);
+      opacity: 0.9;
+    }
+
+    .meditator {
+      position: absolute;
+      left: 50%;
+      bottom: 10%;
+      transform: translateX(-50%);
+      width: 24%;
+      height: 32%;
+      border-radius: 50% 50% 42% 42%;
+      background: linear-gradient(180deg, #f0d8b1, #a57c58 68%, #5a3e2b 100%);
+      box-shadow: 0 0 0 10px rgba(255,255,255,0.04);
+    }
+
+    .meditator::before {
+      content: "";
+      position: absolute;
+      inset: -18% 16% 42% 16%;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #1b1916, #443225);
+    }
+
+    .meditator::after {
+      content: "";
+      position: absolute;
+      left: -32%;
+      right: -32%;
+      bottom: 4%;
+      height: 26%;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(240, 216, 177, 0.84), rgba(177, 132, 91, 0.75));
+      clip-path: ellipse(48% 46% at 50% 50%);
+      box-shadow: 0 0 0 8px rgba(255,255,255,0.03);
+    }
+
+    .footer {
+      padding: 0 0 1.25rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        min-height: auto;
+        padding-top: 1.5rem;
+      }
+      .hero-shell {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy {
+        max-width: 100%;
+      }
+      .hero-visual {
+        min-height: 28rem;
+        order: -1;
+      }
+      h1 {
+        max-width: 11ch;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .container { width: min(calc(100% - 1.2rem), var(--max-width)); }
+      .hero { padding-bottom: 2rem; }
+      h1 { font-size: clamp(2.5rem, 13vw, 4rem); }
+      .subhead { font-size: 1rem; }
+      .benefit { padding: 0.92rem; }
+      .scene-card { padding: 0.85rem; }
+      .hero-visual { min-height: 24rem; border-radius: 22px; }
+      .cta-button { width: 100%; }
+      .microcopy { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="container">
+        <a class="brand-mark" href="#" aria-label="yogi home">
+          <span class="dot" aria-hidden="true"></span>
+          <span>yogi</span>
+        </a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="container hero-shell">
+          <div class="hero-copy">
+            <div class="eyebrow">Nature-rooted practice, arriving soon</div>
+            <h1 id="hero-title">Bring your practice back to nature.</h1>
+            <p class="subhead">
+              yogi is for people who want their yoga journey to feel grounded, restorative, and close to the natural world. Join the waitlist to be first to access a wellness experience shaped around calm, balance, and nature-inspired ritual.
+            </p>
+
+            <div class="benefits" aria-label="Key benefits">
+              <div class="benefit">
+                <div class="check" aria-hidden="true">✓</div>
+                <p>Nature-centered positioning that resonates with wellness-minded practitioners</p>
+              </div>
+              <div class="benefit">
+                <div class="check" aria-hidden="true">✓</div>
+                <p>Waitlist entry for early access before public launch</p>
+              </div>
+              <div class="benefit">
+                <div class="check" aria-hidden="true">✓</div>
+                <p>Brand story that feels calm, grounded, and intentional</p>
+              </div>
+            </div>
+
+            <div class="cta-block">
+              <button class="cta-button" type="button" aria-label="Join the waitlist">
+                Join the Waitlist
+                <span aria-hidden="true">→</span>
+              </button>
+              <div class="microcopy">A gentle first step toward early access, launch updates, and a more restorative practice.</div>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-label="Atmospheric nature-inspired wellness scene">
+            <div class="scene">
+              <div class="scene-card">
+                <div class="scene-top">
+                  <span>soft dawn / forest ritual</span>
+                  <span class="scene-pill">waitlist preview</span>
+                </div>
+                <div class="scene-figure" role="img" aria-label="A calm stylized illustration of a meditator in a forest at dawn, surrounded by mist, trees, and mountains">
+                  <div class="mist"></div>
+                  <div class="mountain"></div>
+                  <div class="tree"></div>
+                  <div class="meditator"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <span>yogi — a calm, nature-rooted wellness experience.</span>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

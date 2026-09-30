@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>London Weather Habit</title>
+    <style>
+        :root {
+            --bg-surface: #1F2937;
+            --text-primary: #FFFFFF;
+            --brand: #1F2937;
+            --cta: #22C55E;
+            --cta-hover: #1FA74A;
+            --cta-active: #1B9E3C;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        section {
+            margin: 20px 0;
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.25em;
+            margin: 10px 0 20px;
+        }
+
+        .benefits {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: left;
+        }
+
+        .benefits p {
+            margin: 5px 0;
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            outline: none;
+        }
+
+        .cta-button:hover {
+            background-color: var(--cta-hover);
+        }
+
+        .cta-button:active {
+            background-color: var(--cta-active);
+        }
+
+        footer {
+            position: relative;
+            text-align: center;
+            padding: 10px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--text-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Make checking London weather a daily habit</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Rain keeps the experience focused on speed and clarity, so users can check the forecast quickly and move on with their day. It’s built for repeat use when you just need the essentials.</h2>
+            <button class="cta-button">Start checking weather</button>
+        </section>
+        <section class="benefits">
+            <h3>Key Benefits:</h3>
+            <p>- Fast daily weather checks with low friction</p>
+            <p>- A clean interface focused on the essentials</p>
+            <p>- Easy repeat visits for routine planning</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 London Weather Habit. All rights reserved.</p>
+    </footer>
+</body>
+</html>

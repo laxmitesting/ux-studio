@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minute-by-Minute Rain Tracking</title>
+    <style>
+        :root {
+            --bg-surface: #1a1a1a;
+            --text-primary: #ffffff;
+            --brand: #0F5E8A;
+            --cta: #22C55E;
+            --text-secondary: #cccccc;
+        }
+        body {
+            margin: 0;
+            font-family: 'Courier New', Courier, monospace;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5em;
+            margin: 0.5em 0;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        section {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            padding: 20px;
+            background: var(--brand);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .benefits {
+            display: flex;
+            flex-direction: column;
+        }
+        .benefit {
+            margin: 5px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            background-color: var(--cta);
+            color: var(--bg-surface);
+            padding: 15px 25px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .cta-button:hover,
+        .cta-button:focus {
+            background-color: lighten(var(--cta), 10%);
+            outline: 3px solid var(--bg-surface);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--bg-surface);
+            color: var(--text-secondary);
+        }
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            section {
+                background: #f0f0f0;
+            }
+            .cta-button {
+                background-color: var(--cta);
+                color: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>See rain changes in the minutes that matter</h1>
+        <h2>Rainy focuses on short-term shifts so Londoners can spot when showers are likely to begin or pass. That makes it easier to wait, move, or duck inside at the right moment.</h2>
+    </header>
+    <main>
+        <section>
+            <h3>Key Benefits</h3>
+            <div class="benefits">
+                <div class="benefit">- Fine-grained timing for rain onset and clearing</div>
+                <div class="benefit">- Clear intensity changes across the next hours</div>
+                <div class="benefit">- Useful for short walks, errands, and waiting out showers</div>
+            </div>
+            <a href="#" class="cta-button">View Rain Timeline</a>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Rainy. All rights reserved.</p>
+    </footer>
+</body>
+</html>

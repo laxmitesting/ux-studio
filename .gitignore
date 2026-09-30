@@ -1,0 +1,42 @@
+# ux-studio/.gitignore
+
+# --- Local Environment & Secrets ---
+.env
+.env.local
+.streamlit/secrets.toml
+
+# --- SQLite Blackboard & Runtime Outputs ---
+data/*.db
+data/*.db-journal
+data/*.db-wal
+outputs/*.html
+!data/.gitkeep
+!outputs/.gitkeep
+logs/
+
+# --- Python Bytecode & Environments ---
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+ENV/
+
+# --- Testing & Quality Gates ---
+.pytest_cache/
+.coverage
+htmlcov/
+
+# --- IDEs & OS Metadata ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.dbs
+
+
+# Node / Mastra
+node_modules/
+package-lock.json
+
+.ruff_cache/

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wellness Habit Landing Page</title>
+    <style>
+        :root {
+            --bg-surface: #1a1a1a;
+            --text-primary: #ffffff;
+            --brand: #3D5A80;
+            --cta: #E0A458;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        section {
+            max-width: 600px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: var(--cta);
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: #000;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.2s;
+            outline: none;
+        }
+
+        .cta-button:hover {
+            background-color: #d49a6a;
+        }
+
+        .cta-button:active {
+            transform: scale(0.95);
+        }
+
+        footer {
+            padding: 20px;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            h2 {
+                font-size: 1em;
+            }
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--text-primary);
+            }
+            header, footer {
+                background-color: #333;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Start your wellness habit in minutes.</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Yogi removes the hesitation around getting started by keeping the path to signup simple and clear.</h2>
+            <p>It’s built for people who want to begin with one easy action and move into practice from there.</p>
+            <button class="cta-button">Sign Up Now</button>
+        </section>
+        <section>
+            <h3>Key Benefits:</h3>
+            <ul>
+                <li>Quick signup-oriented experience</li>
+                <li>Minimal cognitive load for first-time users</li>
+                <li>Clear next step from interest to action</li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Yogi. All rights reserved.</p>
+    </footer>
+</body>
+</html>

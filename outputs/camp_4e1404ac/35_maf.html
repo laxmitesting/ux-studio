@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yoga Routine Landing Page</title>
+    <style>
+        :root {
+            --bg-surface: #fefefe;
+            --text-primary: #333333;
+            --brand: #264653;
+            --cta: #E76F51;
+        }
+        body {
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+        header {
+            background: var(--brand);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin: 10px 0;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin: 10px 0 20px;
+        }
+        section {
+            width: 100%;
+            max-width: 800px;
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .feature {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            text-align: center;
+        }
+        .cta {
+            background: var(--cta);
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .cta:hover, .cta:focus {
+            background: #D75B4D;
+            transform: scale(1.05);
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            font-size: 0.9rem;
+            background: var(--brand);
+            color: white;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #2a2a2a;
+                color: #ffffff;
+            }
+            header, footer {
+                background: #1a1a1a;
+            }
+            .feature {
+                background: #333333;
+                color: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>A Simple Way to Make Yoga Part of Your Routine</h1>
+    </header>
+    <main>
+        <h2>Wellness Through Yoga</h2>
+        <section>
+            <div class="feature">
+                <h3>Straightforward Value</h3>
+                <p>Experience the benefits of yoga with a clear, easy-to-follow plan.</p>
+            </div>
+            <div class="feature">
+                <h3>Confidence Building</h3>
+                <p>A trust-focused approach to ease you into a healthier habit.</p>
+            </div>
+            <div class="feature">
+                <h3>Strong Visibility</h3>
+                <p>CTA elements are prominently placed for easy engagement.</p>
+            </div>
+        </section>
+        <button class="cta" aria-label="Get Started with Yoga Routine">Get Started</button>
+    </main>
+    <footer>
+        <p>&copy; 2023 Yogi. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Rainy — Commute-Ready Forecasts</title>
+  <style>
+    :root {
+      --bg: #0b1220;
+      --bg-elevated: #111b2f;
+      --bg-surface: #152238;
+      --bg-surface-2: #1a2a44;
+      --text-primary: #f3f7ff;
+      --text-secondary: #b8c7dd;
+      --text-muted: #8fa3c1;
+      --brand: #1F4E79;
+      --brand-soft: rgba(31, 78, 121, 0.18);
+      --cta: #F59E0B;
+      --cta-hover: #ffb32c;
+      --success: #34d399;
+      --warning: #fbbf24;
+      --danger: #fb7185;
+      --border: rgba(255, 255, 255, 0.10);
+      --border-strong: rgba(255, 255, 255, 0.18);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --maxw: 1160px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f8fc;
+        --bg-elevated: #ffffff;
+        --bg-surface: #ffffff;
+        --bg-surface-2: #eef4fb;
+        --text-primary: #102033;
+        --text-secondary: #41556f;
+        --text-muted: #60748c;
+        --border: rgba(16, 32, 51, 0.10);
+        --border-strong: rgba(16, 32, 51, 0.16);
+        --shadow: 0 18px 40px rgba(16, 32, 51, 0.10);
+        --brand-soft: rgba(31, 78, 121, 0.10);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background:
+        radial-gradient(1000px 600px at 20% 0%, rgba(31, 78, 121, 0.30), transparent 55%),
+        radial-gradient(800px 500px at 90% 10%, rgba(245, 158, 11, 0.14), transparent 42%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--maxw));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 22px 0 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 22px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--brand) 0%, #285f90 100%);
+      display: grid;
+      place-items: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+    }
+
+    .brand-mark svg { width: 20px; height: 20px; fill: #fff; }
+
+    .nav-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      border: 1px solid var(--border);
+    }
+
+    main { flex: 1; }
+
+    .hero {
+      padding: 34px 0 20px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.12);
+      color: #ffd58a;
+      border: 1px solid rgba(245, 158, 11, 0.24);
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 18px 0 14px;
+      font-size: clamp(2.4rem, 4vw, 4.9rem);
+      line-height: 0.98;
+      letter-spacing: -0.04em;
+      max-width: 12ch;
+    }
+
+    .subheadline {
+      margin: 0;
+      max-width: 62ch;
+      color: var(--text-secondary);
+      font-size: clamp(1.02rem, 1.4vw, 1.16rem);
+    }
+
+    .benefits {
+      margin: 26px 0 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .benefits li {
+      padding: 14px 15px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      color: var(--text-secondary);
+      font-size: 0.96rem;
+      min-height: 100%;
+    }
+
+    .benefits strong {
+      display: block;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+      font-size: 0.96rem;
+    }
+
+    .actions-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 14px 18px;
+      font-weight: 700;
+      font-size: 0.98rem;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, border-color 180ms ease, opacity 180ms ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cta), var(--cta-hover));
+      color: #122033;
+      box-shadow: 0 16px 30px rgba(245, 158, 11, 0.26);
+    }
+
+    .btn-secondary {
+      background: var(--bg-surface-2);
+      color: var(--text-primary);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0px) scale(0.99); }
+    .btn:focus-visible {
+      outline: 3px solid rgba(245, 158, 11, 0.8);
+      outline-offset: 3px;
+    }
+
+    .snapshot {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      background:
+        radial-gradient(500px 220px at 50% 0%, rgba(31, 78, 121, 0.28), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+    }
+
+    .snapshot-card {
+      border-radius: 24px;
+      padding: 22px;
+      background: rgba(13, 20, 34, 0.5);
+      border: 1px solid var(--border);
+    }
+
+    .snapshot-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .city {
+      margin: 0;
+      font-size: 1.05rem;
+      color: var(--text-secondary);
+    }
+
+    .temp {
+      margin: 6px 0 0;
+      font-size: 3.2rem;
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(52, 211, 153, 0.12);
+      color: #8df0c3;
+      border: 1px solid rgba(52, 211, 153, 0.20);
+      font-weight: 700;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+    }
+
+    .metric strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 1.04rem;
+    }
+
+    .timeline {
+      padding: 20px 0 8px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 54ch;
+      font-size: 0.98rem;
+    }
+
+    .timeline-card {
+      padding: 18px;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hours {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .hour {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      min-height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hour time {
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+
+    .rainbar {
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      overflow: hidden;
+      margin: 10px 0 12px;
+    }
+
+    .rainbar > span {
+      display: block;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #5ea4da, #1f4e79);
+    }
+
+    .hour .label {
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .hour .detail {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .commute-actions {
+      padding: 18px 0 44px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .action-card {
+      padding: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.025));
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-height: 220px;
+    }
+
+    .action-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+    }
+
+    .action-card p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .badge {
+      width: fit-content;
+      padding: 7px 10px;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+
+    .leave { background: rgba(52, 211, 153, 0.12); color: #8df0c3; border: 1px solid rgba(52, 211, 153, 0.2); }
+    .wait { background: rgba(251, 191, 36, 0.12); color: #ffd77a; border: 1px solid rgba(251, 191, 36, 0.22); }
+    .umbrella { background: rgba(96, 165, 250, 0.12); color: #b8d7ff; border: 1px solid rgba(96, 165, 250, 0.22); }
+
+    footer {
+      padding: 18px 0 28px;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-line {
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .benefits { grid-template-columns: 1fr; }
+      .hours { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .cards { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar { border-radius: 24px; flex-direction: column; align-items: flex-start; }
+      .hero-copy, .snapshot { padding: 20px; }
+      h1 { max-width: 100%; }
+      .metrics { grid-template-columns: 1fr; }
+      .hours { grid-template-columns: 1fr; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+      .btn { width: 100%; }
+      .actions-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container">
+        <div class="topbar" aria-label="Brand bar">
+          <div class="brand">
+            <div class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                <path d="M12 2a7.5 7.5 0 0 0-7.5 7.5c0 2.18.94 4.13 2.43 5.49A4.5 4.5 0 0 0 11 20h2a4.5 4.5 0 0 0 4.07-2.6A7.49 7.49 0 0 0 19.5 9.5 7.5 7.5 0 0 0 12 2Zm0 2a5.5 5.5 0 0 1 5.25 7.1l-.18.58.43.42A5.48 5.48 0 0 1 14.1 18H13v-3a1 1 0 0 0-2 0v3h-1.1a3.5 3.5 0 0 1-3.17-2.07l-.2-.43-.42-.18A5.5 5.5 0 0 1 12 4Z"/>
+              </svg>
+            </div>
+            <span>Rainy</span>
+          </div>
+          <div class="nav-pill">Commute-ready forecasts for London</div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="panel hero-copy">
+              <div>
+                <div class="eyebrow">Commute-ready forecasting</div>
+                <h1>Know the best time to leave before the rain starts</h1>
+                <p class="subheadline">
+                  Rainy turns London’s forecast into a clear commute decision, showing when conditions change so you can plan your departure with less guesswork. See the next few hours at a glance and leave with the right timing in mind.
+                </p>
+
+                <ul class="benefits" aria-label="Key benefits">
+                  <li>
+                    <strong>Hourly rain timing</strong>
+                    for near-term travel decisions
+                  </li>
+                  <li>
+                    <strong>At-a-glance snapshot</strong>
+                    before you head out
+                  </li>
+                  <li>
+                    <strong>Clear cues</strong>
+                    to delay, depart, or grab an umbrella
+                  </li>
+                </ul>
+              </div>
+
+              <div class="actions-row">
+                <button class="btn btn-primary" type="button">Check My Commute</button>
+                <button class="btn btn-secondary" type="button">View Today’s Outlook</button>
+              </div>
+            </div>
+
+            <aside class="panel snapshot" aria-label="Forecast snapshot">
+              <div class="snapshot-card">
+                <div class="snapshot-top">
+                  <div>
+                    <p class="city">London, today</p>
+                    <p class="temp">14°C</p>
+                  </div>
+                  <div class="status">Light rain in 2h 10m</div>
+                </div>
+                <div class="metrics">
+                  <div class="metric">
+                    <span>Feels like</span>
+                    <strong>12°C</strong>
+                  </div>
+                  <div class="metric">
+                    <span>Wind</span>
+                    <strong>11 mph</strong>
+                  </div>
+                  <div class="metric">
+                    <span>Rain chance</span>
+                    <strong>78%</strong>
+                  </div>
+                  <div class="metric">
+                    <span>Visibility</span>
+                    <strong>Good</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div class="snapshot-card">
+                <div class="snapshot-top" style="margin-bottom:10px;">
+                  <div>
+                    <p class="city">Departure guidance</p>
+                    <strong style="font-size:1.2rem;">Best leave window: 8:15–8:45</strong>
+                  </div>
+                </div>
+                <p class="subheadline" style="font-size:0.98rem; margin:0;">
+                  Clearer conditions now, with rain building after the first commute window.
+                </p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="timeline">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Hourly commute timeline</h2>
+              <p>See how rain moves through the next few hours so you can leave with confidence.</p>
+            </div>
+          </div>
+
+          <div class="timeline-card">
+            <div class="hours">
+              <article class="hour">
+                <div>
+                  <time>7:00 AM</time>
+                  <div class="rainbar" aria-hidden="true"><span style="width: 10%;"></span></div>
+                  <div class="label">Dry start</div>
+                  <div class="detail">Best for an early departure.</div>
+                </div>
+                <div class="detail" style="color: var(--success); font-weight:700;">Leave now</div>
+              </article>
+
+              <article class="hour">
+                <div>
+                  <time>8:00 AM</time>
+                  <div class="rainbar" aria-hidden="true"><span style="width: 28%;"></span></div>
+                  <div class="label">Clouds thickening</div>
+                  <div class="detail">Rain still holding off.</div>
+                </div>
+                <div class="detail" style="color: var(--warning); font-weight:700;">Watch closely</div>
+              </article>
+
+              <article class="hour">
+                <div>
+                  <time>9:00 AM</time>
+                  <div class="rainbar" aria-hidden="true"><span style="width: 68%;"></span></div>
+                  <div class="label">Light rain begins</div>
+                  <div class="detail">Umbrella recommended.</div>
+                </div>
+                <div class="detail" style="color: var(--cta); font-weight:700;">Pack umbrella</div>
+              </article>
+
+              <article class="hour">
+                <div>
+                  <time>10:00 AM</time>
+                  <div class="rainbar" aria-hidden="true"><span style="width: 84%;"></span></div>
+                  <div class="label">Steadier rain</div>
+                  <div class="detail">Delaying may mean wetter travel.</div>
+                </div>
+                <div class="detail" style="color: var(--danger); font-weight:700;">Consider waiting</div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="commute-actions">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <h2>Quick action cards</h2>
+              <p>Make the commute call fast: leave now, wait a bit, or grab an umbrella.</p>
+            </div>
+          </div>
+
+          <div class="cards">
+            <article class="action-card">
+              <span class="badge leave">Leave now</span>
+              <h3>Beat the rain window</h3>
+              <p>Conditions are clearest in the immediate commute window, so heading out sooner gives you the best chance of staying dry.</p>
+              <button class="btn btn-primary" type="button">Check My Commute</button>
+            </article>
+
+            <article class="action-card">
+              <span class="badge wait">Wait 20 minutes</span>
+              <h3>Hold for a clearer departure</h3>
+              <p>If your schedule is flexible, a short delay may help you avoid the first signs of rain and make the walk more comfortable.</p>
+              <button class="btn btn-secondary" type="button">See timing</button>
+            </article>
+
+            <article class="action-card">
+              <span class="badge umbrella">Pack umbrella</span>
+              <h3>Prepare for changing conditions</h3>
+              <p>Rain is likely later this morning, so keep coverage handy if you’ll be out after the first commute window.</p>
+              <button class="btn btn-secondary" type="button">Review forecast</button>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-line">
+          <div>Rainy — commute-ready forecasts for London</div>
+          <div>Built for clearer departure decisions before the rain starts.</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

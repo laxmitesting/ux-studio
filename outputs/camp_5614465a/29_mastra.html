@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mindful Yoga Experience</title>
+    <style>
+        :root {
+            --bg-surface: #ffffff;
+            --text-primary: #333333;
+            --brand: #5A6F52;
+            --cta: #1F6F5B;
+            --font-stack: 'Merriweather', serif;
+        }
+        body {
+            margin: 0;
+            font-family: var(--font-stack);
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: var(--brand);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        section {
+            max-width: 600px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: normal;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        li {
+            margin: 0.5rem 0;
+            font-size: 1.1rem;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        input[type="email"] {
+            padding: 0.8rem;
+            border: 2px solid var(--brand);
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            width: 100%;
+            max-width: 300px;
+        }
+        button {
+            background-color: var(--cta);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+        button:hover, button:focus {
+            background-color: darken(var(--cta), 10%);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: var(--brand);
+            color: white;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #333333;
+                color: #ffffff;
+            }
+            header, footer {
+                background-color: #222222;
+            }
+            input[type="email"], button {
+                border-color: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Discover a more mindful way to experience yoga.</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Join the waitlist to receive early access to a thoughtfully crafted experience.</h2>
+            <ul>
+                <li>Emotionally resonant branding for wellness seekers</li>
+                <li>Nature-forward visual and verbal identity</li>
+                <li>Low-friction waitlist capture for interested visitors</li>
+            </ul>
+        </section>
+        <form>
+            <input type="email" placeholder="Enter your email" aria-label="Email for waitlist" required>
+            <button type="submit">Get Early Access</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Mindful Yoga. All rights reserved.</p>
+    </footer>
+</body>
+</html>

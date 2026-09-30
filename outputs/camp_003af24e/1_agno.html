@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Chakulo: an open-source contribution hub for Mangalorean diaspora developers to contribute code, content, and ideas rooted in Indian retro-village culture." />
+  <meta name="color-scheme" content="dark light" />
+  <title>Chakulo — Heritage Contribution Hub</title>
+  <style>
+    :root {
+      --bg: #0f0c0a;
+      --bg-elevated: #17110e;
+      --bg-surface: #1c1512;
+      --bg-card: #231a16;
+      --text-primary: #f6efe8;
+      --text-secondary: #d3c3b8;
+      --text-muted: #a89284;
+      --brand: #7A4E2D;
+      --brand-soft: rgba(122, 78, 45, 0.2);
+      --cta: #D97706;
+      --cta-hover: #f59e0b;
+      --border: rgba(255, 255, 255, 0.08);
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --content-max: 1140px;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5efe9;
+        --bg-elevated: #fcf8f4;
+        --bg-surface: #ffffff;
+        --bg-card: #fffaf6;
+        --text-primary: #1f1713;
+        --text-secondary: #4f4139;
+        --text-muted: #716057;
+        --brand: #7A4E2D;
+        --brand-soft: rgba(122, 78, 45, 0.12);
+        --cta: #D97706;
+        --cta-hover: #b45309;
+        --border: rgba(31, 23, 19, 0.10);
+        --shadow: 0 24px 60px rgba(78, 52, 30, 0.12);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html {
+      color-scheme: dark light;
+      scroll-behavior: smooth;
+    }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(122, 78, 45, 0.22), transparent 34%),
+        radial-gradient(circle at top right, rgba(217, 119, 6, 0.13), transparent 28%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg-elevated) 100%);
+      color: var(--text-primary);
+      line-height: 1.6;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: min(100% - 2rem, var(--content-max));
+      margin: 0 auto;
+    }
+
+    header {
+      position: relative;
+      padding: 1.2rem 0 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.7rem 0 1.2rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 2.4rem;
+      height: 2.4rem;
+      border-radius: 999px;
+      background:
+        radial-gradient(circle at 35% 30%, rgba(255,255,255,0.34), transparent 26%),
+        linear-gradient(135deg, var(--brand), #5c381f);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 10px 25px rgba(0,0,0,0.22);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-pill {
+      display: inline-flex;
+      gap: 0.6rem;
+      align-items: center;
+      padding: 0.55rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      color: var(--text-secondary);
+      font-size: 0.94rem;
+    }
+
+    main { padding: 1rem 0 4rem; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 1.5rem;
+      align-items: stretch;
+      padding: 1.25rem 0 2rem;
+    }
+
+    .hero-copy, .hero-panel, .section-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), transparent 28%), var(--bg-surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius-xl);
+    }
+
+    .hero-copy {
+      padding: clamp(1.5rem, 3vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 28rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      width: fit-content;
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(122, 78, 45, 0.35);
+      background: var(--brand-soft);
+      color: #f3d8c1;
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 1.1rem;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 6vw, 5.2rem);
+      max-width: 11ch;
+      font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .lede {
+      max-width: 58ch;
+      color: var(--text-secondary);
+      font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+      margin-bottom: 1.6rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-top: 0.4rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      padding: 0.95rem 1.25rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      transition: transform 180ms ease, background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--cta), #b45309);
+      color: #fff8ef;
+      box-shadow: 0 14px 30px rgba(217, 119, 6, 0.28);
+    }
+
+    .btn-primary:hover {
+      background: linear-gradient(180deg, var(--cta-hover), #d97706);
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(217, 119, 6, 0.34);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+      box-shadow: 0 10px 20px rgba(217, 119, 6, 0.24);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.03);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(217, 119, 6, 0.4);
+      background: rgba(217, 119, 6, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .btn:focus-visible, a:focus-visible {
+      outline: 3px solid rgba(217, 119, 6, 0.8);
+      outline-offset: 3px;
+    }
+
+    .hero-panel {
+      padding: 1.25rem;
+      display: grid;
+      gap: 1rem;
+      align-content: start;
+    }
+
+    .panel-heading {
+      padding: 0.4rem 0.2rem 0.2rem;
+    }
+
+    .panel-heading p {
+      margin: 0.5rem 0 0;
+      color: var(--text-secondary);
+    }
+
+    .pathways {
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .pathway {
+      padding: 1rem;
+      border-radius: var(--radius-lg);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .pathway strong {
+      font-size: 1.04rem;
+    }
+
+    .pathway span {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-top: 0.2rem;
+    }
+
+    .badge {
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.86rem;
+    }
+
+    .section {
+      padding: 0.9rem 0 1.4rem;
+    }
+
+    .section-title {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.5rem, 2.3vw, 2.2rem);
+      font-family: Georgia, "Iowan Old Style", serif;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 54ch;
+    }
+
+    .proof-grid, .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .proof-card, .step-card {
+      padding: 1.2rem;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 35%), var(--bg-card);
+      border: 1px solid var(--border);
+      min-height: 100%;
+    }
+
+    .proof-card h3, .step-card h3 {
+      font-size: 1.08rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .proof-card p, .step-card p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .proof-meta {
+      margin-top: 0.9rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .step-index {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: var(--brand-soft);
+      color: #f6d9c0;
+      border: 1px solid rgba(122, 78, 45, 0.35);
+      margin-bottom: 0.9rem;
+      font-weight: 700;
+    }
+
+    footer {
+      padding: 1.5rem 0 2.2rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-inner {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero, .proof-grid, .steps-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-copy { min-height: auto; }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 1.2rem, var(--content-max)); }
+      .nav { padding-bottom: 0.8rem; }
+      .nav-pill { display: none; }
+      .hero-copy, .hero-panel, .proof-card, .step-card { border-radius: 22px; }
+      .actions { flex-direction: column; align-items: stretch; }
+      .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="#top" aria-label="Chakulo home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>Chakulo</span>
+        </a>
+        <div class="nav-pill" aria-label="Project context">
+          <span aria-hidden="true">●</span>
+          Heritage Contribution Hub
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="container hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="eyebrow">For diaspora developers shaping a rooted open source project</div>
+        <h1 id="hero-title">Build for home, even from afar.</h1>
+        <p class="lede">
+          Chakulo gives Mangalorean diaspora developers a place to contribute code, content, and ideas to an open-source project rooted in Indian retro-village culture. It turns cultural connection into a real contribution path, not just passive nostalgia.
+        </p>
+        <div class="actions">
+          <a class="btn btn-primary" href="#contribution-guide">View Contribution Guide</a>
+          <a class="btn btn-secondary" href="#community-proof">See Community Proof</a>
+        </div>
+      </div>
+
+      <aside class="hero-panel" aria-label="Contributor pathways">
+        <div class="panel-heading">
+          <h2 style="font-size:1.35rem;">Choose your way in</h2>
+          <p>Contribute at the intersection of heritage, product craft, and open-source collaboration.</p>
+        </div>
+        <div class="pathways">
+          <div class="pathway">
+            <strong>Code the experience</strong>
+            <span>Build UI, features, and tooling that reflect a culturally specific mission with real-world utility.</span>
+          </div>
+          <div class="pathway">
+            <strong>Shape the story</strong>
+            <span>Write content, microcopy, and cultural context that ground the product in Mangalorean life.</span>
+          </div>
+          <div class="pathway">
+            <strong>Bring your ideas</strong>
+            <span>Suggest rituals, patterns, and community features that keep the project open, collaborative, and alive.</span>
+          </div>
+        </div>
+        <div class="badge-row" aria-label="Key benefits">
+          <span class="badge">Open-source contribution paths</span>
+          <span class="badge">Community-led participation</span>
+          <span class="badge">Heritage-centered product vision</span>
+        </div>
+      </aside>
+    </section>
+
+    <section class="container section" id="community-proof" aria-labelledby="proof-title">
+      <div class="section-title">
+        <div>
+          <h2 id="proof-title">Community proof that feels real, not ornamental</h2>
+          <p>Built for people who want their skills to matter in a project that speaks their language, respects their roots, and welcomes contribution.</p>
+        </div>
+      </div>
+
+      <div class="proof-grid">
+        <article class="proof-card">
+          <h3>Mission-first participation</h3>
+          <p>Every contribution lane maps to a clear cultural and product purpose, making it easier to start and easier to stay engaged.</p>
+          <div class="proof-meta">No generic open-source ambiguity.</div>
+        </article>
+        <article class="proof-card">
+          <h3>Designed for diaspora collaborators</h3>
+          <p>Whether you live near Mangalore or across the world, the project gives you a practical way to participate in something familiar.</p>
+          <div class="proof-meta">Connection through contribution.</div>
+        </article>
+        <article class="proof-card">
+          <h3>Heritage with product value</h3>
+          <p>Your work helps shape a digital experience that feels rooted in retro-village culture while remaining useful, modern, and open.</p>
+          <div class="proof-meta">Culture as an operating principle.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="container section" id="contribution-guide" aria-labelledby="guide-title">
+      <div class="section-title">
+        <div>
+          <h2 id="guide-title">Open-source contribution steps</h2>
+          <p>A simple path from curiosity to meaningful contribution, built to reduce friction and keep the cultural mission clear.</p>
+        </div>
+      </div>
+
+      <div class="steps-grid">
+        <article class="step-card">
+          <div class="step-index">1</div>
+          <h3>Read the contribution guide</h3>
+          <p>Understand the project’s heritage lens, what the community is building, and where your skills can help most.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-index">2</div>
+          <h3>Pick a pathway</h3>
+          <p>Choose code, content, or ideas based on your strengths and the kind of cultural contribution you want to make.</p>
+        </article>
+        <article class="step-card">
+          <div class="step-index">3</div>
+          <h3>Join the community flow</h3>
+          <p>Collaborate openly, receive feedback, and help shape a product that reflects Mangalorean heritage with care.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>Chakulo — Heritage Contribution Hub for Mangalorean diaspora developers</div>
+        <div>Open-source. Community-led. Rooted in culture.</div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

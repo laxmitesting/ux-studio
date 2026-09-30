@@ -1,0 +1,29 @@
+name: Lint
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install Lint Tools
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff flake8 black
+
+      - name: Run Linter
+        run: |
+          # Use whichever tool your project prefers (ruff, flake8, or black --check)
+          ruff check .

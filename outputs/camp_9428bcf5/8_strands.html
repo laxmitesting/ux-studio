@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App Landing Page</title>
+    <style>
+        :root {
+            --bg-surface: #1a1a1a;
+            --text-primary: #ffffff;
+            --brand: #4B6A4F;
+            --cta: #D9A441;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Georgia', serif;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        header {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            scroll-behavior: smooth;
+        }
+
+        section {
+            padding: 4rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-top: 0.5rem;
+            max-width: 600px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+
+        li {
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: var(--bg-surface);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #c79a2b;
+        }
+
+        .cta-button:focus {
+            outline: 2px solid var(--cta);
+            outline-offset: 2px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+
+            .cta-button {
+                font-size: 1rem;
+            }
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f9f9f9;
+                color: #333;
+            }
+
+            header, footer {
+                background-color: rgba(255, 255, 255, 0.8);
+            }
+
+            .cta {
+                background-color: var(--brand);
+                color: #ffffff;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>A weather app for people who actually watch the weather</h1>
+        <h2>Rainy turns checking the forecast into a more considered habit, with a London-and-countryside mood that feels made for UK weather watchers. It gives the experience a sense of place, not just numbers.</h2>
+    </header>
+    <main>
+        <section>
+            <h2>Key Benefits</h2>
+            <ul>
+                <li>Creates a more engaging daily weather-checking routine</li>
+                <li>Blends London and countryside atmosphere into the product feel</li>
+                <li>Speaks to users who care about weather as a subject, not just a utility</li>
+            </ul>
+        </section>
+        <section>
+            <button class="cta-button">Join the Waitlist</button>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Weather Watcher. All rights reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>Book Your Dubai Flight Fast</title>
+  <style>
+    :root {
+      --bg-surface: #f7f9fc;
+      --bg-elevated: #ffffff;
+      --text-primary: #102033;
+      --text-secondary: #52637a;
+      --brand: #2457a6;
+      --brand-soft: #eaf1fb;
+      --cta: #e86f1b;
+      --cta-hover: #cc5f13;
+      --border: rgba(36, 87, 166, 0.14);
+      --shadow: 0 18px 50px rgba(16, 32, 51, 0.10);
+      --focus: #0f6fff;
+      --radius-xl: 28px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+      --max-width: 1160px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-surface: #0c1420;
+        --bg-elevated: #101b2b;
+        --text-primary: #f3f7fd;
+        --text-secondary: #b6c4d8;
+        --brand: #7ea9ff;
+        --brand-soft: rgba(126, 169, 255, 0.12);
+        --cta: #ff8a3d;
+        --cta-hover: #ff7b24;
+        --border: rgba(126, 169, 255, 0.18);
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.30);
+        --focus: #9dc0ff;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      color-scheme: light dark;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1200px 700px at 12% 8%, rgba(36, 87, 166, 0.10), transparent 50%),
+        radial-gradient(900px 500px at 90% 12%, rgba(232, 111, 27, 0.10), transparent 48%),
+        var(--bg-surface);
+      color: var(--text-primary);
+      line-height: 1.5;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: 100%;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: 12px;
+      transform: translateY(-140%);
+      background: var(--bg-elevated);
+      color: var(--text-primary);
+      border: 2px solid var(--focus);
+      padding: 10px 14px;
+      border-radius: 999px;
+      z-index: 1000;
+      transition: transform 0.2s ease;
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+      outline: none;
+    }
+
+    header {
+      padding: 22px 0 10px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-size: 1.05rem;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--brand), #4d7fdd);
+      box-shadow: 0 12px 24px rgba(36, 87, 166, 0.24);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::before,
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      background: rgba(255, 255, 255, 0.92);
+      border-radius: 999px;
+    }
+
+    .brand-mark::before {
+      width: 18px;
+      height: 4px;
+      left: 10px;
+      top: 14px;
+    }
+
+    .brand-mark::after {
+      width: 12px;
+      height: 4px;
+      left: 16px;
+      top: 24px;
+    }
+
+    .utility {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .utility-pill {
+      padding: 10px 14px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--bg-elevated) 84%, transparent);
+      border-radius: 999px;
+      backdrop-filter: blur(8px);
+    }
+
+    main {
+      padding: 20px 0 56px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .booking-card,
+    .benefits,
+    .faq-card {
+      background: color-mix(in srgb, var(--bg-elevated) 92%, transparent);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: clamp(24px, 4vw, 44px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--brand);
+      font-weight: 700;
+      font-size: 0.92rem;
+      letter-spacing: 0.01em;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: var(--cta);
+      box-shadow: 0 0 0 6px color-mix(in srgb, var(--cta) 14%, transparent);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.06em;
+      max-width: 11ch;
+    }
+
+    .lede {
+      margin: 18px 0 0;
+      font-size: clamp(1.03rem, 1.35vw, 1.18rem);
+      color: var(--text-secondary);
+      max-width: 58ch;
+    }
+
+    .benefit-list {
+      list-style: none;
+      padding: 0;
+      margin: 26px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    .benefit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: var(--radius-md);
+      background: var(--brand-soft);
+      border: 1px solid color-mix(in srgb, var(--brand) 14%, transparent);
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    .benefit-list svg {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 auto;
+      margin-top: 1px;
+      color: var(--brand);
+    }
+
+    .hero-actions {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border: 0;
+      border-radius: 999px;
+      background: var(--cta);
+      color: #fff;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      box-shadow: 0 14px 30px rgba(232, 111, 27, 0.30);
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .cta-button:hover {
+      background: var(--cta-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 34px rgba(232, 111, 27, 0.36);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    .cta-button:focus-visible,
+    .secondary-link:focus-visible,
+    .booking-card input:focus-visible,
+    .booking-card select:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .secondary-link {
+      color: var(--brand);
+      font-weight: 700;
+      text-decoration: underline;
+      text-decoration-thickness: 0.12em;
+      text-underline-offset: 0.18em;
+    }
+
+    .booking-card {
+      padding: clamp(18px, 3vw, 28px);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .booking-card header {
+      padding: 0;
+    }
+
+    .booking-title {
+      margin: 0;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .booking-note {
+      margin: 6px 0 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .booking-grid {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    input,
+    select {
+      width: 100%;
+      appearance: none;
+      border: 1px solid color-mix(in srgb, var(--border) 90%, #0000);
+      background: var(--bg-surface);
+      color: var(--text-primary);
+      border-radius: 14px;
+      padding: 14px 14px;
+      font: inherit;
+      min-height: 48px;
+      transition: border-color 180ms ease, transform 180ms ease, background-color 180ms ease;
+    }
+
+    input::placeholder {
+      color: color-mix(in srgb, var(--text-secondary) 70%, transparent);
+    }
+
+    .booking-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }
+
+    .mini-copy {
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .supporting-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .info-tile {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: color-mix(in srgb, var(--bg-elevated) 76%, transparent);
+      border: 1px solid var(--border);
+    }
+
+    .info-tile strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      letter-spacing: -0.02em;
+    }
+
+    .info-tile p {
+      margin: 0;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .section {
+      margin-top: 22px;
+    }
+
+    .benefits {
+      padding: clamp(22px, 3vw, 30px);
+      display: grid;
+      gap: 18px;
+    }
+
+    .section-title {
+      margin: 0;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      letter-spacing: -0.04em;
+    }
+
+    .section-subtitle {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 60ch;
+    }
+
+    .benefit-cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .card {
+      padding: 18px;
+      border-radius: var(--radius-lg);
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      min-height: 160px;
+    }
+
+    .card .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--brand-soft);
+      color: var(--brand);
+      margin-bottom: 14px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1.05rem;
+      letter-spacing: -0.03em;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .faq-card {
+      margin-top: 22px;
+      padding: clamp(22px, 3vw, 30px);
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    details {
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+      border-radius: 16px;
+      padding: 0 16px;
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 16px 0;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    summary::after {
+      content: "+";
+      color: var(--brand);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    details[open] summary::after {
+      content: "–";
+    }
+
+    details p {
+      margin: 0 0 16px;
+      color: var(--text-secondary);
+      max-width: 70ch;
+    }
+
+    footer {
+      padding: 18px 0 34px;
+      color: var(--text-secondary);
+      font-size: 0.92rem;
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-cards,
+      .supporting-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      header {
+        padding-top: 16px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .booking-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .booking-card,
+      .benefits,
+      .faq-card {
+        border-radius: 22px;
+      }
+
+      h1 {
+        max-width: 12ch;
+      }
+
+      .booking-actions {
+        align-items: stretch;
+      }
+
+      .cta-button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="page">
+    <header>
+      <div class="container topbar">
+        <a class="brand" href="#" aria-label="flydubai home">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>flydubai</span>
+        </a>
+        <div class="utility" aria-label="Trip reassurance">
+          <span class="utility-pill">Simple booking</span>
+          <span class="utility-pill">Short-stay friendly</span>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <div class="container">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy">
+            <div>
+              <div class="eyebrow">Quick-scan booking flow</div>
+              <h1 id="hero-title">Book your Dubai flight fast and keep the trip moving</h1>
+              <p class="lede">
+                flydubai suits tourists who want a straightforward booking path and a sensible fare, without spending extra time or money on unnecessary complexity. That leaves more room for the rest of the itinerary.
+              </p>
+
+              <ul class="benefit-list" aria-label="Key benefits">
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12.5L9.2 16.7L19 6.9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Fast path from search to booking
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12.5L9.2 16.7L19 6.9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Affordable fares for short leisure stays
+                </li>
+                <li>
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M5 12.5L9.2 16.7L19 6.9" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                  Less planning friction for time-sensitive travelers
+                </li>
+              </ul>
+
+              <div class="hero-actions">
+                <a class="cta-button" href="#booking">Book Now</a>
+                <a class="secondary-link" href="#trust">See why travelers trust it</a>
+              </div>
+            </div>
+          </div>
+
+          <aside class="booking-card" id="booking" aria-labelledby="booking-title">
+            <header>
+              <h2 class="booking-title" id="booking-title">Book in a few steps</h2>
+              <p class="booking-note">A compact flow for tourists who want to move from search to seat selection without extra friction.</p>
+            </header>
+
+            <form>
+              <div class="booking-grid">
+                <div class="field">
+                  <label for="from">From</label>
+                  <input id="from" name="from" type="text" placeholder="City or airport" autocomplete="address-level2" />
+                </div>
+                <div class="field">
+                  <label for="to">To</label>
+                  <input id="to" name="to" type="text" value="Dubai" />
+                </div>
+                <div class="field">
+                  <label for="depart">Depart</label>
+                  <input id="depart" name="depart" type="date" />
+                </div>
+                <div class="field">
+                  <label for="return">Return</label>
+                  <input id="return" name="return" type="date" />
+                </div>
+                <div class="field full">
+                  <label for="travellers">Travelers</label>
+                  <select id="travellers" name="travellers">
+                    <option>1 traveler</option>
+                    <option>2 travelers</option>
+                    <option>3 travelers</option>
+                    <option>4+ travelers</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="booking-actions">
+                <button class="cta-button" type="submit">Book Now</button>
+                <div class="mini-copy">Clear fare, clear path, no unnecessary steps.</div>
+              </div>
+            </form>
+
+            <div class="supporting-row" aria-label="Booking reassurance points">
+              <div class="info-tile">
+                <strong>Fast checkout</strong>
+                <p>Designed for quick decisions and less back-and-forth.</p>
+              </div>
+              <div class="info-tile">
+                <strong>Good value</strong>
+                <p>Keep the fare sensible for short leisure trips.</p>
+              </div>
+              <div class="info-tile">
+                <strong>Tourist-friendly</strong>
+                <p>Leave more budget and time for Dubai itself.</p>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section benefits" aria-labelledby="benefits-title">
+          <div>
+            <h2 class="section-title" id="benefits-title">Why it works for short-stay travelers</h2>
+            <p class="section-subtitle">
+              When the trip is brief, the booking experience should be brief too. These value points help travelers compare quickly and move on.
+            </p>
+          </div>
+
+          <div class="benefit-cards">
+            <article class="card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                  <path d="M7 12h10M12 7l5 5-5 5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <h3>Simple path to purchase</h3>
+              <p>Quick scan, clear options, and a booking flow that reduces hesitation.</p>
+            </article>
+
+            <article class="card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                  <path d="M6 7h12M7 12h10M9 17h6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>Budget-conscious fares</h3>
+              <p>A sensible choice for tourists who want to spend more on the destination than the booking process.</p>
+            </article>
+
+            <article class="card">
+              <div class="icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" fill="none">
+                  <path d="M12 3v18M3 12h18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+                </svg>
+              </div>
+              <h3>Less planning friction</h3>
+              <p>Ideal for time-sensitive travelers who value a straightforward decision and a fast next step.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="faq-card" id="trust" aria-labelledby="trust-title">
+          <h2 class="section-title" id="trust-title">Compact trust notes</h2>
+          <p class="section-subtitle">
+            Short answers to common booking concerns, keeping the page useful without adding clutter.
+          </p>
+
+          <div class="faq-list">
+            <details>
+              <summary>Is this a good option for a short holiday?</summary>
+              <p>Yes. The booking experience is intentionally streamlined for travelers who want to secure flights quickly and focus on the rest of the itinerary.</p>
+            </details>
+
+            <details>
+              <summary>Why is the fare positioning emphasized?</summary>
+              <p>Because short-stay tourists often value total trip efficiency. A sensible fare helps keep the overall travel plan balanced.</p>
+            </details>
+
+            <details>
+              <summary>What makes the booking flow feel easier?</summary>
+              <p>Clear steps, compact choices, and fewer distractions create a faster path from search to purchase.</p>
+            </details>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container footer-row">
+        <div>flydubai — Simple booking for short-stay tourists</div>
+        <div>Brand accent: <span style="color: var(--brand); font-weight: 700;">#2457A6</span> · CTA: <span style="color: var(--cta); font-weight: 700;">#E86F1B</span></div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

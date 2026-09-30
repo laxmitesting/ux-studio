@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="color-scheme" content="light dark" />
+  <title>flydubai — Dubai Explorers Value Landing Page</title>
+  <style>
+    :root {
+      --bg-surface: #f7f9fc;
+      --bg-card: #ffffff;
+      --bg-muted: #edf3fb;
+      --text-primary: #122033;
+      --text-secondary: #526277;
+      --brand: #1E5AA8;
+      --brand-strong: #16488a;
+      --cta: #F57C20;
+      --cta-hover: #de7016;
+      --cta-active: #c96212;
+      --border: rgba(30, 90, 168, 0.14);
+      --shadow: 0 18px 50px rgba(18, 32, 51, 0.10);
+      --shadow-soft: 0 10px 24px rgba(18, 32, 51, 0.08);
+      --focus: 0 0 0 4px rgba(245, 124, 32, 0.22);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+      --max-width: 1180px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg-surface: #0d141e;
+        --bg-card: #111b28;
+        --bg-muted: #162233;
+        --text-primary: #f4f7fb;
+        --text-secondary: #b3c0d4;
+        --brand: #74a6e8;
+        --brand-strong: #8ab7f0;
+        --cta: #ff9a47;
+        --cta-hover: #ff8a2a;
+        --cta-active: #eb7c18;
+        --border: rgba(138, 183, 240, 0.18);
+        --shadow: 0 22px 56px rgba(0, 0, 0, 0.30);
+        --shadow-soft: 0 14px 28px rgba(0, 0, 0, 0.22);
+        --focus: 0 0 0 4px rgba(255, 154, 71, 0.24);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(30, 90, 168, 0.12), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(245, 124, 32, 0.10), transparent 24%),
+        linear-gradient(180deg, var(--bg-surface), var(--bg-surface));
+      color: var(--text-primary);
+      font-family: Inter, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+      color-scheme: light dark;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      width: 100%;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: min(100% - 2rem, var(--max-width));
+      margin: 0 auto;
+    }
+
+    header {
+      padding: 1.25rem 0 0;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.25rem 0 1rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+    }
+
+    .brand-mark {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.2) 36%, transparent 37%),
+        linear-gradient(135deg, var(--brand), var(--brand-strong));
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      flex: 0 0 auto;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 50%;
+      width: 1.05rem;
+      height: 0.58rem;
+      transform: translate(-50%, -50%) skewX(-18deg);
+      background: rgba(255,255,255,0.95);
+      border-radius: 999px;
+      box-shadow: 0 0 0 0.18rem rgba(255,255,255,0.0);
+    }
+
+    .brand small {
+      display: block;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0;
+      margin-top: 0.15rem;
+    }
+
+    .hero {
+      padding: 1rem 0 1.5rem;
+    }
+
+    .hero-shell {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 1.5rem;
+      align-items: stretch;
+      background:
+        linear-gradient(160deg, rgba(30, 90, 168, 0.10), rgba(30, 90, 168, 0.04) 38%, rgba(245, 124, 32, 0.05)),
+        var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .hero-copy {
+      padding: clamp(1.5rem, 3vw, 3rem);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--brand);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 999px;
+      background: var(--cta);
+      box-shadow: 0 0 0 6px rgba(245, 124, 32, 0.14);
+      flex: 0 0 auto;
+    }
+
+    h1 {
+      margin: 1rem 0 0.85rem;
+      font-size: clamp(2.3rem, 5vw, 4.8rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+
+    .subheadline {
+      margin: 0;
+      max-width: 60ch;
+      font-size: clamp(1rem, 1.45vw, 1.15rem);
+      color: var(--text-secondary);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-top: 1.6rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.95rem 1.25rem;
+      font: inherit;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease, color 180ms ease;
+      outline: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 11.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--cta), var(--cta-hover));
+      color: #fff;
+      box-shadow: 0 14px 28px rgba(245, 124, 32, 0.24);
+    }
+
+    .btn-primary:hover { background: linear-gradient(135deg, var(--cta-hover), var(--cta-active)); transform: translateY(-1px); }
+    .btn-primary:active { transform: translateY(0); background: linear-gradient(135deg, var(--cta-active), var(--cta-active)); }
+    .btn-primary:focus-visible { box-shadow: 0 14px 28px rgba(245, 124, 32, 0.24), var(--focus); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 100%;
+      padding: 1.25rem;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.9), transparent 30%),
+        linear-gradient(180deg, rgba(30, 90, 168, 0.15), rgba(30, 90, 168, 0.03));
+      border-left: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .visual-card {
+      width: 100%;
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.6);
+      border-radius: 24px;
+      padding: 1.1rem;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .route {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+    }
+
+    .route strong {
+      color: var(--text-primary);
+      font-size: 1.02rem;
+    }
+
+    .route-line {
+      height: 0.5rem;
+      border-radius: 999px;
+      background:
+        linear-gradient(90deg, rgba(30,90,168,0.18), rgba(30,90,168,0.78) 40%, rgba(245,124,32,0.9) 78%, rgba(245,124,32,0.25));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .route-line::before,
+    .route-line::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: var(--bg-card);
+      border: 3px solid var(--brand);
+      box-shadow: 0 0 0 4px rgba(30,90,168,0.10);
+    }
+
+    .route-line::before { left: 0.1rem; }
+    .route-line::after {
+      right: 0.1rem;
+      border-color: var(--cta);
+      box-shadow: 0 0 0 4px rgba(245,124,32,0.10);
+    }
+
+    .visual-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .stat {
+      border-radius: 18px;
+      padding: 0.9rem;
+      background: rgba(255,255,255,0.72);
+      border: 1px solid rgba(18, 32, 51, 0.06);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+    }
+
+    .stat span {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    main {
+      padding: 0.25rem 0 2.5rem;
+    }
+
+    .benefits {
+      padding: 0.5rem 0 1.5rem;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-title h2 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.2vw, 2rem);
+      letter-spacing: -0.03em;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 45ch;
+    }
+
+    .tiles {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .tile {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.25rem;
+      box-shadow: 0 6px 18px rgba(18, 32, 51, 0.04);
+      min-height: 100%;
+    }
+
+    .tile-icon {
+      width: 2.8rem;
+      height: 2.8rem;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, rgba(30,90,168,0.12), rgba(245,124,32,0.12));
+      color: var(--brand);
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    .tile h3 {
+      margin: 0 0 0.45rem;
+      font-size: 1.05rem;
+      letter-spacing: -0.02em;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--text-secondary);
+    }
+
+    .cta-block {
+      padding: 1rem 0 0.5rem;
+    }
+
+    .cta-panel {
+      display: grid;
+      grid-template-columns: 1.2fr auto;
+      gap: 1rem;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(30,90,168,0.10), rgba(245,124,32,0.10)),
+        var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-xl);
+      padding: clamp(1.25rem, 2.8vw, 2rem);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .cta-panel h2 {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.3rem, 2vw, 1.85rem);
+      letter-spacing: -0.03em;
+    }
+
+    .cta-panel p {
+      margin: 0;
+      color: var(--text-secondary);
+      max-width: 55ch;
+    }
+
+    footer {
+      padding: 1.25rem 0 2rem;
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+    }
+
+    .footer-line {
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem 1rem;
+      align-items: center;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem 1.2rem;
+    }
+
+    .meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .dot {
+      width: 0.45rem;
+      height: 0.45rem;
+      border-radius: 50%;
+      background: var(--cta);
+      box-shadow: 0 0 0 4px rgba(245,124,32,0.12);
+    }
+
+    @media (max-width: 920px) {
+      .hero-shell,
+      .cta-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        border-left: 0;
+        border-top: 1px solid var(--border);
+        min-height: 18rem;
+      }
+
+      .tiles {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        align-items: start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 1.1rem, var(--max-width)); }
+      header { padding-top: 0.8rem; }
+      .topbar { padding-bottom: 0.6rem; }
+      .brand small { display: none; }
+      h1 { max-width: 100%; }
+      .actions { flex-direction: column; }
+      .btn { width: 100%; min-width: 0; }
+      .visual-stats { grid-template-columns: 1fr; }
+      .route { flex-direction: column; align-items: flex-start; }
+      .footer-line { align-items: flex-start; }
+    }
+
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus);
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="container">
+        <div class="topbar" aria-label="Brand header">
+          <a class="brand" href="#" aria-label="flydubai home">
+            <span class="brand-mark" aria-hidden="true"></span>
+            <span>
+              flydubai
+              <small>Value-led travel for Dubai explorers</small>
+            </span>
+          </a>
+        </div>
+
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-shell">
+            <div class="hero-copy">
+              <div class="eyebrow">Blue-and-Orange Value for Dubai Explorers</div>
+              <h1 id="hero-title">A low-cost flight that fits the pace of a Dubai trip</h1>
+              <p class="subheadline">
+                flydubai combines a practical fare structure with a clean, confident brand feel that suits tourists heading to Dubai. It helps travelers keep costs down while still choosing an airline that feels intentional and polished.
+              </p>
+              <div class="actions">
+                <a class="btn btn-primary" href="#cta">Get Started</a>
+              </div>
+            </div>
+
+            <div class="hero-visual" aria-hidden="true">
+              <div class="visual-card">
+                <div class="route">
+                  <div>
+                    <strong>Dubai-bound</strong><br />
+                    Leisure travel made practical
+                  </div>
+                  <div style="text-align:right;">
+                    <strong>Blue + Orange</strong><br />
+                    Clear, modern brand energy
+                  </div>
+                </div>
+                <div class="route-line"></div>
+                <div class="visual-stats">
+                  <div class="stat">
+                    <strong>Affordable</strong>
+                    <span>Value-first fare logic</span>
+                  </div>
+                  <div class="stat">
+                    <strong>Confident</strong>
+                    <span>Clean visual presence</span>
+                  </div>
+                  <div class="stat">
+                    <strong>Sensible</strong>
+                    <span>Balanced for presentation</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <section class="benefits" aria-labelledby="benefits-title">
+          <div class="section-title">
+            <h2 id="benefits-title">Why this fits the traveler evaluating value</h2>
+            <p>Concise reasons to choose an airline that keeps budgets controlled without feeling bare-bones.</p>
+          </div>
+
+          <div class="tiles">
+            <article class="tile">
+              <div class="tile-icon">01</div>
+              <h3>Affordable option for Dubai-bound leisure travel</h3>
+              <p>Supports trip planning with a sensible cost structure for tourists who want to spend more on the destination.</p>
+            </article>
+
+            <article class="tile">
+              <div class="tile-icon">02</div>
+              <h3>Distinctive brand presence that feels modern and clear</h3>
+              <p>Blue-and-orange identity signals a polished experience with enough personality to stand out confidently.</p>
+            </article>
+
+            <article class="tile">
+              <div class="tile-icon">03</div>
+              <h3>A sensible fit for travelers who value both price and presentation</h3>
+              <p>Balances low-cost expectations with a cleaner, more intentional impression from first click to boarding.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="cta-block" id="cta" aria-labelledby="cta-title">
+          <div class="cta-panel">
+            <div>
+              <h2 id="cta-title">Ready to plan a smarter Dubai trip?</h2>
+              <p>Choose a flight experience that stays practical, looks polished, and matches the rhythm of a value-conscious getaway.</p>
+            </div>
+            <a class="btn btn-primary" href="#">Get Started</a>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer>
+      <div class="container">
+        <div class="footer-line">
+          <div class="meta">
+            <span><i class="dot" aria-hidden="true"></i> Light canvas theme</span>
+            <span><i class="dot" aria-hidden="true"></i> Mobile responsive</span>
+            <span><i class="dot" aria-hidden="true"></i> Accessible interactions</span>
+          </div>
+          <div>flydubai value landing page</div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

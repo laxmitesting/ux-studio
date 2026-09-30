@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <title>London Rain Weather</title>
+    <style>
+        :root {
+            --bg-surface: #121213;
+            --text-primary: #ffffff;
+            --brand: #3C5A6B;
+            --cta: #D97706;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-surface);
+            color: var(--text-primary);
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin: 0;
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 1.25rem;
+            margin: 0;
+            max-width: 600px;
+        }
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        section {
+            background: var(--brand);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: var(--text-primary);
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover, .cta-button:focus {
+            background-color: #f4a300;
+            outline: none;
+        }
+
+        .weather-card {
+            padding: 1rem;
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .weather-card h3 {
+            margin: 0.5rem 0;
+            font-size: 1.5rem;
+        }
+
+        .weather-card p {
+            margin: 0;
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background-color: #f0f0f0;
+                color: #000000;
+            }
+            section {
+                background: #ffffff;
+            }
+            .weather-card {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+            .cta-button {
+                background-color: var(--cta);
+                color: #000000;
+            }
+        }
+
+        @media (min-width: 768px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Built for London’s weather reality</h1>
+        <h2>Rainy frames the forecast around the way Londoners actually live: commuting, walking, waiting, and adapting to changing skies. The experience feels locally relevant instead of generic and detached.</h2>
+        <button class="cta-button">Explore London Weather</button>
+    </header>
+    <main>
+        <section class="weather-card">
+            <h3>Forecast tuned to London routines</h3>
+            <p>Experience precise forecasts that sync with your daily activities.</p>
+        </section>
+        <section class="weather-card">
+            <h3>Weather context for city movement</h3>
+            <p>Understand how the weather impacts your commute and outdoor plans.</p>
+        </section>
+        <section class="weather-card">
+            <h3>A more relevant alternative</h3>
+            <p>Move beyond generic apps—get weather insights specifically for London.</p>
+        </section>
+    </main>
+    <footer>
+        <p style="text-align:center; padding: 1rem;">&copy; 2023 London Rain. All rights reserved.</p>
+    </footer>
+</body>
+</html>

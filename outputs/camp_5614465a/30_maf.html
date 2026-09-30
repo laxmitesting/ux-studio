@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Early Access to Yogi</title>
+    <style>
+        :root {
+            --bg-surface: #406A5B;
+            --text-primary: #FFFFFF;
+            --brand: #406A5B;
+            --cta: #D8A55A;
+            --cta-hover: #C59A4A;
+            --cta-active: #B6893C;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Courier New', monospace;
+            color: var(--text-primary);
+            background-color: var(--bg-surface);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 1.25em;
+            margin: 10px 0 20px;
+        }
+
+        .benefits {
+            margin: 20px 0;
+            text-align: left;
+            width: 100%;
+        }
+
+        .benefits p {
+            margin: 5px 0;
+        }
+
+        .waitlist-form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        input[type="email"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .cta-button {
+            background-color: var(--cta);
+            color: var(--text-primary);
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            outline: none;
+        }
+
+        .cta-button:hover {
+            background-color: var(--cta-hover);
+        }
+
+        .cta-button:active {
+            background-color: var(--cta-active);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                color: var(--text-primary);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Get early access to yogi.</h1>
+    </header>
+    <main>
+        <h2>If you practice yoga and care about wellness with a connection to nature, yogi is built to feel calm, intentional, and worth waiting for. Join the waitlist now to be first notified when it opens.</h2>
+        <section class="benefits">
+            <p>- Clear early-access call to action</p>
+            <p>- Concise explanation of the product’s wellness and nature angle</p>
+            <p>- Conversion-focused page structure for waitlist signups</p>
+        </section>
+        <form class="waitlist-form" action="#" method="POST">
+            <input type="email" placeholder="Enter your email" required>
+            <button type="submit" class="cta-button">Join the Waitlist</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2023 Yogi. All rights reserved.</p>
+    </footer>
+</body>
+</html>
